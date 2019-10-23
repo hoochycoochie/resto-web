@@ -1,5 +1,6 @@
 export default {
   en: {
+    home: "Home",
     identifiant: "Phone or Email",
     reference: "Company Reference",
     username: "username",
@@ -83,6 +84,7 @@ export default {
   },
 
   fr: {
+    home: "Accueil",
     identifiant: "Phone ou Email",
     reference: "Numéro réference",
     home_delivery: "Livraison à domicile",

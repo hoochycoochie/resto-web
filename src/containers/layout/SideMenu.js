@@ -1,98 +1,76 @@
-import React, { Component } from "react";
+import React from "react";
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import TextIcon from "./TextIcon";
+import { graphql, compose } from "react-apollo";
+import { GET_CURRENT_MENU_QUERY } from "../../graphql/store/query-mutation/user";
 
-class SideMenu extends Component {
-  state = {
-    activeItem: "dashboard"
-  };
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-  changeSize = () => this.setState({ smallSidebar: !this.props.smallMenu });
-
-  getMenu() {
-    const { activeItem } = this.state;
-    return (
-      <Menu
-        fixed="left"
-        borderless
-        className={(this.props.smallMenu ? "small-side" : "") + " side"}
-        vertical
-      >
-        <Menu.Item
-          as={Link}
-          to={"/"}
-          name="dashboard"
-          active={activeItem === "dashboard"}
-          onClick={this.handleItemClick}
+function SideMenu({ children, menu: { loading, ...rest } }) {
+  const smallMenu =
+    rest.smallMenu && rest.smallMenu.smallMenu
+      ? rest.smallMenu.smallMenu
+      : false;
+  return (
+    <div className="parent">
+      <div className={(smallMenu ? "small-side " : "") + "side"}>
+        <Menu
+          fixed="left"
+          borderless
+          className={(smallMenu ? "small-side" : "") + " side"}
+          vertical
         >
-          <TextIcon hideText={true} color="teal" name="home">
-            Dashboard
-          </TextIcon>
-        </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to={"/"}
+            name="dashboard"
+            // active={activeItem === "dashboard"}
+          >
+            <TextIcon hideText={smallMenu} color="teal" name="home">
+              Dashboard
+            </TextIcon>
+          </Menu.Item>
 
-        <Menu.Item
-          as={Link}
-          to={"/appointments"}
-          name="appointments"
-          active={activeItem === "appointments"}
-          onClick={this.handleItemClick}
-        >
-          <TextIcon hideText={this.props.smallMenu} name="calendar">
-            Appointments
-          </TextIcon>
-        </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to={"/"}
+            name="appointments"
+            // active={activeItem === "appointments"}
+          >
+            <TextIcon hideText={smallMenu} name="calendar">
+              Appointments
+            </TextIcon>
+          </Menu.Item>
 
-        <Menu.Item
-          as={Link}
-          to={"/userManagement"}
-          name="userManagement"
-          active={activeItem === "userManagement"}
-          onClick={this.handleItemClick}
-        >
-          <TextIcon hideText={this.props.smallMenu} name="users">
-            Patients
-          </TextIcon>
-        </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to={"/userManagement"}
+            name="userManagement"
+            // active={activeItem === "userManagement"}
+          >
+            <TextIcon hideText={smallMenu} name="users">
+              Patients
+            </TextIcon>
+          </Menu.Item>
 
-        <Menu.Item
-          as={Link}
-          to={"/card"}
-          name="card"
-          active={activeItem === "card"}
-          onClick={this.handleItemClick}
-        >
-          <TextIcon hideText={this.props.smallMenu} name="time">
-            Card
-          </TextIcon>
-        </Menu.Item>
-
-        {/* <Menu.Item as={Link} to={'/layout'} name='layout' active={activeItem === 'layout'}
-                           onClick={this.handleItemClick}>
-                    <TextIcon hideText={this.props.smallMenu} name='calendar'>
-                        Layout
-                    </TextIcon>
-
-                </Menu.Item> */}
-      </Menu>
-    );
-  }
-
-  render() {
-    return (
-      <div className="parent">
-        <div className={(this.props.smallMenu ? "small-side " : "") + "side"}>
-          {this.getMenu()}
-        </div>
-        <div
-          className={(this.props.smallMenu ? "small-content " : "") + "content"}
-        >
-          {this.props.children}
-        </div>
+          <Menu.Item
+            as={Link}
+            to={"/card"}
+            name="card"
+            // active={activeItem === "card"}
+          >
+            <TextIcon hideText={smallMenu} name="time">
+              Card
+            </TextIcon>
+          </Menu.Item>
+        </Menu>
       </div>
-    );
-  }
+      <div className={(smallMenu ? "small-content " : "") + "content"}>
+        {children}
+      </div>
+    </div>
+  );
 }
 
-export default SideMenu;
+export default compose(graphql(GET_CURRENT_MENU_QUERY, { name: "menu" }))(
+  SideMenu
+);

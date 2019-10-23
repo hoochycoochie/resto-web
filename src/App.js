@@ -7,35 +7,31 @@ import { Login, NotFound } from "./containers";
 import { GuestRoute, AuthRoute } from "./routes";
 import { Route } from "react-router-dom";
 import Command from "./containers/Command";
-import { USER_STORAGE } from "./utils/static_constants";
-import { addUserMutation, currentUserQuery } from "./graphql/state/user";
+import {
+  LOGIN_USER_MUTATION,
+  GET_CURRENT_USER_QUERY
+} from "./graphql/store/query-mutation/user";
+import Home from "./containers/Home";
+import {
+  ROOT_PATH,
+  LOGIN_PATH,
+  RESTAURANT_ROOT_PATH,
+  NOT_FOUND_PATH
+} from "./utils/static_constants";
 
 class App extends React.Component {
-  componentWillMount = async () => {
-    
-    const user = await localStorage.getItem(USER_STORAGE);
-    const currentUser = JSON.parse(user);
-    if (currentUser) {
-      await this.props.setUser({
-        variables: {
-          user: {
-            ...currentUser
-          }
-        }
-      });
-    }
-    console.log("componentWillMount");
-  };
   render() {
-    console.log("this.props", this.props);
+    //console.log("this.props", this.props);
     return (
       <IntlProvider locale={"en"} messages={messages[("en", "fr")]}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/notfound" component={NotFound} />
+            <GuestRoute exact path={ROOT_PATH} component={Home} />
+            <Route exact path={NOT_FOUND_PATH} component={NotFound} />
 
-            <GuestRoute exact path="/" component={Login} />
-            <Route exact path="/restaurant" component={Command} />
+            <GuestRoute exact path={LOGIN_PATH} component={Login} />
+
+            <AuthRoute exact path={RESTAURANT_ROOT_PATH} component={Command} />
           </Switch>
         </BrowserRouter>
       </IntlProvider>
@@ -43,6 +39,6 @@ class App extends React.Component {
   }
 }
 export default compose(
-  graphql(addUserMutation, { name: "setUser" }),
-  graphql(currentUserQuery, { name: "onlineUser" })
+  graphql(LOGIN_USER_MUTATION, { name: "setUser" }),
+  graphql(GET_CURRENT_USER_QUERY, { name: "onlineUser" })
 )(App);

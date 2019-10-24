@@ -80,7 +80,14 @@ export default {
     selection_number: "selection number",
     wrong_identifiant: "Wrong identifiant ",
     password_wrong: "Wrong password ",
-    unknown_company: "Unknown company reference"
+    unknown_company: "Unknown company reference",
+    commands: "Commands",
+    team: "Team",
+    subcats: "Subcategories",
+    product_list: "Products List",
+    subprods: "Subproducts",
+    confirm: "Yes",
+    confirm_logout: "Sure to log out ?"
   },
 
   fr: {
@@ -215,6 +222,13 @@ export default {
     selection_number: "nombre de choix",
     wrong_identifiant: "Identifiant erroné ",
     password_wrong: "mot de passe incorrect",
-    unknown_company: "Erreur reference"
+    unknown_company: "Erreur reference",
+    commands: "Commandes",
+    team: "Personnel",
+    subcats: "Sous catégories",
+    product_list: "Produits",
+    subprods: "Sous Produits",
+    confirm: "Je continue",
+    confirm_logout: "êtes vous sur(e) de vouloir vous déconnecter ?"
   }
 };

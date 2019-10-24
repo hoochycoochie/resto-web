@@ -7,6 +7,9 @@ query getCurrentUser {
     user{
       picture
       name
+      lastname
+      email
+      id
     }
   }
 }
@@ -24,16 +27,4 @@ export const LOGOUT_USER_MUTATION = gql`
   }
 `;
 
-export const GET_CURRENT_MENU_QUERY = gql`
-  query getMenu {
-    smallMenu @client{
-      smallMenu
-    }
-  }
-`;
 
-export const TOGGLE_MENU_MUTATION = gql`
-  mutation toggleMenu {
-    toggleMenu @client
-  }
-`;

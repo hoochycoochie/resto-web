@@ -8,15 +8,13 @@ import { withClientState } from "apollo-link-state";
 import { onError } from "apollo-link-error";
 import { getMainDefinition } from "apollo-utilities";
 import { TOKEN_NAME } from "../utils/static_constants";
-
-// import { CompanySchema, UserSchema, MemberRoleSchema } from "./store/schemas";
-import {
-  loginUser,
-  logoutUser,
-  toggleMenu,
-  getCurrentUser
-} from "./store/resolvers/user";
+import { loginUser, logoutUser } from "./store/resolvers/user";
+import { toggleMenu, changeLang } from "./store/resolvers/settings";
 import { GET_CURRENT_USER_QUERY } from "./store/query-mutation/user";
+import {
+  GET_CURRENT_MENU_QUERY,
+  GET_CURRENT_LANG_QUERY
+} from "./store/query-mutation/settings";
 
 // developpement
 const graphqlUrl = `http://localhost:3001/graphql`;
@@ -25,12 +23,14 @@ const wsUrl = "ws://localhost:3001/graphql";
 
 const cache = new InMemoryCache();
 
-//const typeDefs = [CompanySchema, UserSchema, MemberRoleSchema];
-
 const initialState = {
+  lang: {
+    __typename: "lang",
+    lang: "en"
+  },
   smallMenu: {
     __typename: "smallMenu",
-    smallMenu: true
+    smallMenu: false
   },
   currentUser: {
     __typename: "currentUser",
@@ -43,20 +43,28 @@ const initialState = {
 const stateLink = withClientState({
   cache,
   defaults: initialState,
-  //typeDefs,
   resolvers: {
     Mutation: {
       loginUser,
       logoutUser,
-      toggleMenu
+      toggleMenu,
+      changeLang
     },
     Query: {
       getCurrentUser(_obj, { _ }, { cache }) {
         const query = GET_CURRENT_USER_QUERY;
-        console.log("query",query)
         const { currentUser } = cache.readQuery({ query });
-
         return currentUser;
+      },
+      getMenu(_obj, { _ }, { cache }) {
+        const query = GET_CURRENT_MENU_QUERY;
+        const { smallMenu } = cache.readQuery({ query });
+        return smallMenu;
+      },
+      getLang(_obj, { _ }, { cache }) {
+        const query = GET_CURRENT_LANG_QUERY;
+        const { lang } = cache.readQuery({ query });
+        return lang;
       }
     }
   }

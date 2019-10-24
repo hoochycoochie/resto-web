@@ -18,7 +18,11 @@ import {
   GET_CURRENT_USER_QUERY
 } from "../graphql/store/query-mutation/user";
 import { colors } from "../utils/constants";
-import { USER_STORAGE, TOKEN_NAME } from "../utils/static_constants";
+import {
+  USER_STORAGE,
+  TOKEN_NAME,
+  RESTAURANT_ROOT_PATH
+} from "../utils/static_constants";
 import { Redirect } from "react-router-dom";
 import Layout from "./layout";
 
@@ -116,23 +120,19 @@ const loginSchema = Yup.object().shape({
 export default compose(
   graphql(loginCompanyMutation, { name: "loginUser" }),
   graphql(LOGIN_USER_MUTATION, { name: "setUser" }),
-  graphql(GET_CURRENT_USER_QUERY, { name: "currentUser" }),
+
   withFormik({
     validationSchema: loginSchema,
     mapPropsToValues: () => ({ identifiant: "", password: "", reference: "" }),
     handleSubmit: async (
       { identifiant, password, reference },
-      {
-        props: { loginUser, history, setUser, currentUser },
-        setSubmitting,
-        setFieldError
-      }
+      { props: { loginUser, setUser }, setSubmitting, setFieldError }
     ) => {
       try {
         const response = await loginUser({
           variables: { identifiant, password, reference }
         });
-        console.log("response", response);
+
         const {
           ok,
           token,
@@ -143,23 +143,22 @@ export default compose(
         } = response.data.loginCompany;
 
         if (ok) {
-          const userState = await setUser({
+          const currentUser = {
+            authenticated: true,
+            user,
+            roles,
+            company
+          };
+          await setUser({
             variables: {
-              currentUser: {
-                authenticated: true,
-                user,
-                roles,
-                company
-              }
+              currentUser
             }
           });
 
-          console.log("userState", userState);
           setSubmitting(false);
-          // localStorage.setItem(USER_STORAGE, JSON.stringify(connectedUser));
+          await localStorage.setItem(USER_STORAGE, JSON.stringify(currentUser));
           await localStorage.setItem(TOKEN_NAME, token);
-          console.log("currentUser====================", currentUser);
-          await history.push("/restaurant");
+          return <Redirect to={RESTAURANT_ROOT_PATH} />;
         } else {
           errors.forEach(error => {
             const message = <FormattedMessage id={error.message} />;

@@ -14,7 +14,8 @@ import { Link } from "react-router-dom";
 import { ROOT_PATH, LOGIN_PATH } from "../utils/static_constants";
 import { FormattedMessage } from "react-intl";
 import { colors } from "../utils/constants";
-
+const logo =
+  "https://cdn1.vectorstock.com/i/1000x1000/13/80/organic-food-restaurant-logo-vector-17131380.jpg";
 const Layout = ({ children }) => (
   <div>
     <Menu
@@ -25,7 +26,7 @@ const Layout = ({ children }) => (
     >
       <Container>
         <Menu.Item as={Link} to={ROOT_PATH} header>
-          <Image size="mini" src="/logo.png" style={{ marginRight: "1.5em" }} />
+          <Image size="mini" src={logo} style={{ marginRight: "1.5em" }} />
           SenYobante Entreprise
         </Menu.Item>
         <Menu.Item as={Link} to={ROOT_PATH}>
@@ -44,7 +45,11 @@ const Layout = ({ children }) => (
     <Segment
       inverted
       vertical
-      style={{ margin: "5em 0em 0em", padding: "5em 0em" }}
+      style={{
+        margin: "5em 0em 0em",
+        padding: "5em 0em",
+        backgroundColor: colors.VIOLET
+      }}
     >
       <Container textAlign="center">
         <Grid divided inverted stackable>
@@ -85,7 +90,7 @@ const Layout = ({ children }) => (
         </Grid>
 
         <Divider inverted section />
-        <Image centered size="mini" src="/logo.png" />
+        <Image centered size="mini" src={logo} />
         <List horizontal inverted divided link size="small">
           <List.Item as="a" href="#">
             Site Map

@@ -5,8 +5,8 @@ import { FormattedMessage } from "react-intl";
 const ConfirmModal = ({ open, cancel, confirm, text, title }) => (
   <Modal
     open={open}
-    closeOnEscape={cancel}
-    closeOnDimmerClick={cancel}
+    closeOnEscape={open}
+    closeOnDimmerClick={open}
     onClose={cancel}
   >
     <Modal.Header>{<FormattedMessage id={title} />}</Modal.Header>

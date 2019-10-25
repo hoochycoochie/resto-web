@@ -87,7 +87,16 @@ export default {
     product_list: "Products List",
     subprods: "Subproducts",
     confirm: "Yes",
-    confirm_logout: "Sure to log out ?"
+    confirm_logout: "Sure to log out ?",
+    created_at: "created_at",
+    updated_at: "updated_at",
+    author: "author",
+    subprod_count: "subprod count",
+    subcat_list: "Subcategories List",
+    total: "total",
+    subcat_creation: "Subcat creation",
+    create: "Create",
+    name_exists_already: "this name already exists"
   },
 
   fr: {
@@ -229,6 +238,15 @@ export default {
     product_list: "Produits",
     subprods: "Sous Produits",
     confirm: "Je continue",
-    confirm_logout: "êtes vous sur(e) de vouloir vous déconnecter ?"
+    confirm_logout: "êtes vous sur(e) de vouloir vous déconnecter ?",
+    created_at: "Date de création",
+    updated_at: "Date de modification",
+    author: "Auteur",
+    subprod_count: "Sous produits",
+    subcat_list: "Liste des sous catégories",
+    total: "total",
+    subcat_creation: "Création Sous catégorie",
+    create: "Enregistrer",
+    name_exists_already: "cette sous catégorie existe déjà"
   }
 };

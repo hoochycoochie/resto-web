@@ -1,5 +1,6 @@
 const TOKEN_NAME = "yob";
 const USER_STORAGE = "kdkdoekdoekodoeode";
+const COMPANY_ID_STORAGE = "eeeeeeee";
 
 const RESTAURANT_ROOT_PATH = "/restaurant";
 const RESTAURANT_TEAM_PATH = "/restaurant/team";
@@ -13,6 +14,7 @@ const NOT_FOUND_PATH = "/notfound";
 export {
   USER_STORAGE,
   TOKEN_NAME,
+  COMPANY_ID_STORAGE,
   RESTAURANT_ROOT_PATH,
   RESTAURANT_TEAM_PATH,
   RESTAURANT_SUBCAT_PATH,

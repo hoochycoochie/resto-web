@@ -96,7 +96,9 @@ export default {
     total: "total",
     subcat_creation: "Subcat creation",
     create: "Create",
-    name_exists_already: "this name already exists"
+    name_exists_already: "this name already exists",
+    subproduct_list: "Subproducts list",
+    settings: "Settings"
   },
 
   fr: {
@@ -247,6 +249,8 @@ export default {
     total: "total",
     subcat_creation: "Création Sous catégorie",
     create: "Enregistrer",
-    name_exists_already: "cette sous catégorie existe déjà"
+    name_exists_already: "Ce nom existe déjà",
+    subproduct_list: "Liste des sous produits",
+    settings: "Paramétrage"
   }
 };

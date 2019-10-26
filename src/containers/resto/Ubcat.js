@@ -13,7 +13,7 @@ import { FormattedMessage } from "react-intl";
 import SubcatSearch from "../../components/subcat/SubcatSearch";
 import SubcatCreate from "../../components/subcat/SubcatCreate";
 import { createSubcatMutation } from "../../graphql/mutation/subcat";
-import ApolloCacheUpdater from "apollo-cache-updater";
+
 function SubcatViewList({
   subcats: { loading, fetchMore, ...rest },
   handleSubmit: handleSubmit2,
@@ -102,24 +102,25 @@ function SubcatViewList({
             }
           }
         ) => {
-          const mutationResult = subcat; // mutation result to pass into the updater
-          const updates = ApolloCacheUpdater({
-            proxy, // apollo proxy
-            queriesToUpdate: [findSubcatQuery], // queries you want to automatically update
-            searchVariables: {},
-            mutationResult,
-            operation: {
-              type: "ADD",
-              add: ({ data: { data, total, ...rest } }) => {
-                return {
-                  ...rest,
-                  total: total + 1,
-                  data: [{ ...mutationResult }, ...data]
-                };
-              }
+          try {
+            let {
+              findSubcat: { data, skip, total, __typename }
+            } = await proxy.readQuery({
+              query: findSubcatQuery,
+              variables: { company_id }
+            });
+            if (subcat && subcat.id) {
+              const newData = {
+                data: data.unshift(subcat),
+                skip,
+                total: total + 1,
+                __typename
+              };
+              await proxy.writeQuery({ query: findSubcatQuery, data: newData });
             }
-          });
-          console.log("updates", updates);
+          } catch (error) {
+            console.log("error updating query", error);
+          }
         }
       });
 
@@ -208,12 +209,12 @@ export default compose(
       variables: {
         company_id: JSON.parse(localStorage.getItem(COMPANY_ID_STORAGE))
       },
-      fetchPolicy: "cache"
+      fetchPolicy: "cache-and-network"
     })
   }),
   withFormik({
     validationSchema: createSubcatSchema,
     mapPropsToValues: () => ({ name: "" }),
-    displayName: "createSubcat"
+    displayName:"createSubcat"
   })
 )(SubcatViewList);

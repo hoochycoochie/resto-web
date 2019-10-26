@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "apollo-cache-inmemory": "^1.5.1",
+    "apollo-cache-updater": "^0.1.2",
     "apollo-client": "2.5.1",
     "apollo-link": "^1.2.8",
     "apollo-link-context": "^1.0.14",

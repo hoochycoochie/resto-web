@@ -1,12 +1,10 @@
 import React from "react";
 import { Label, Table, Pagination, Button, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import DisplayDate from "../DisplayDate";
 import { FormattedMessage } from "react-intl";
 import { colors } from "../../utils/constants";
-import { RESTAURANT_SUBPROD_PATH_WITH_PARAMS } from "../../utils/static_constants";
 
-function SubcatList({ data, take, total, activePage, onPageChange }) {
+function SubprodList({ data, take, total, activePage, onPageChange }) {
   return (
     <div>
       <Table size="small">
@@ -16,7 +14,7 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
               <FormattedMessage id="name" />
             </Table.HeaderCell>
             <Table.HeaderCell>
-              <FormattedMessage id="subprod_count" />
+              <FormattedMessage id="price" />
             </Table.HeaderCell>
 
             <Table.HeaderCell>
@@ -35,14 +33,11 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
           <Table.Body>
             {data.map(d => (
               <Table.Row key={d.id}>
-                <Table.Cell
-                  as={Link}
-                  to={`${RESTAURANT_SUBPROD_PATH_WITH_PARAMS}${d.id}`}
-                >
+                <Table.Cell>
                   <Label>{d.name}</Label>
                 </Table.Cell>
                 <Table.Cell>
-                  <Label>{d.subprod_count}</Label>
+                  <Label>{d.price}</Label>
                 </Table.Cell>
 
                 <Table.Cell>
@@ -99,4 +94,4 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
   );
 }
 
-export default SubcatList;
+export default SubprodList;

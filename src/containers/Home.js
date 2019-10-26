@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Divider,
-  Dropdown,
-  Grid,
-  Header,
-  Image,
-  List,
-  Menu,
-  Segment
-} from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { ROOT_PATH, LOGIN_PATH } from "../utils/static_constants";
-import { FormattedMessage } from "react-intl";
+import { Container, Header, Image } from "semantic-ui-react";
 import Layout from "./layout";
 const logo =
   "https://cdn1.vectorstock.com/i/1000x1000/13/80/organic-food-restaurant-logo-vector-17131380.jpg";
@@ -26,34 +13,13 @@ const Home = ({ children }) => (
         single column layouts.
       </p>
 
-      <Image
-        src={logo}
-        style={{ marginTop: "2em" }}
-      />
-      <Image
-        src={logo}
-        style={{ marginTop: "2em" }}
-      />
-      <Image
-       src={logo}
-        style={{ marginTop: "2em" }}
-      />
-      <Image
-       src={logo}
-        style={{ marginTop: "2em" }}
-      />
-      <Image
-       src={logo}
-        style={{ marginTop: "2em" }}
-      />
-      <Image
-       src={logo}
-        style={{ marginTop: "2em" }}
-      />
-      <Image
-       src={logo}
-        style={{ marginTop: "2em" }}
-      />
+      <Image src={logo} style={{ marginTop: "2em" }} />
+      <Image src={logo} style={{ marginTop: "2em" }} />
+      <Image src={logo} style={{ marginTop: "2em" }} />
+      <Image src={logo} style={{ marginTop: "2em" }} />
+      <Image src={logo} style={{ marginTop: "2em" }} />
+      <Image src={logo} style={{ marginTop: "2em" }} />
+      <Image src={logo} style={{ marginTop: "2em" }} />
     </Container>
   </Layout>
 );

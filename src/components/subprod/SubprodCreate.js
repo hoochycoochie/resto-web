@@ -4,7 +4,7 @@ import { colors } from "../../utils/constants";
 import { FormattedMessage } from "react-intl";
 const FormField = Form.Field;
 
-const SubcatCreate = ({
+const SubprodCreate = ({
   values,
   touched,
   errors,
@@ -49,6 +49,27 @@ const SubcatCreate = ({
             )}
           </FormField>
 
+          <FormField required>
+            <label>
+              <FormattedMessage id="price" />
+            </label>
+
+            <Input
+              type="number"
+              label={{ basic: true, content: "cfa" }}
+              labelPosition="right"
+              value={values.price}
+              name="price"
+              fluid
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+
+            {touched.price && errors.price && (
+              <Message color="red">{errors.price}</Message>
+            )}
+          </FormField>
+
           <Button
             type="submit"
             style={{ backgroundColor: colors.VIOLET, color: colors.PINK }}
@@ -61,4 +82,4 @@ const SubcatCreate = ({
   </Modal>
 );
 
-export default SubcatCreate;
+export default SubprodCreate;

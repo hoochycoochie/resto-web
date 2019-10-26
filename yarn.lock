@@ -1932,6 +1932,11 @@ apollo-cache-inmemory@^1.5.1:
     ts-invariant "^0.4.0"
     tslib "^1.9.3"
 
+apollo-cache-updater@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/apollo-cache-updater/-/apollo-cache-updater-0.1.2.tgz#6624518c0773e302340914d783562c36763a2b12"
+  integrity sha512-55cavAP8Tv8wlHJWyMcO/XRM4HzA+J2r4Tx7FugdWla1D89ZXggRLUu1RTl7pAHBYaDHhvsJcYQ9in9Vx6RbaA==
+
 apollo-cache@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/apollo-cache/-/apollo-cache-1.2.1.tgz#aae71eb4a11f1f7322adc343f84b1a39b0693644"

@@ -18,7 +18,8 @@ import {
   USER_STORAGE,
   RESTAURANT_SUBCAT_PATH,
   RESTAURANT_PRODUCT_PATH,
-  RESTAURANT_SUBPROD_PATH
+  RESTAURANT_SUBPROD_PATH,
+  RESTAURANT_COMMAND_PATH
 } from "./utils/static_constants";
 import { GET_CURRENT_LANG_QUERY } from "./graphql/store/query-mutation/settings";
 import {
@@ -26,7 +27,8 @@ import {
   TeamViewList,
   SubcatViewList,
   ProductViewList,
-  SubprodViewList
+  SubprodViewList,
+  CompanySettingsView
 } from "./containers/resto";
 
 class App extends React.Component {
@@ -59,6 +61,12 @@ class App extends React.Component {
             <AuthRoute
               exact
               path={RESTAURANT_ROOT_PATH}
+              component={CompanySettingsView}
+            />
+
+            <AuthRoute
+              exact
+              path={RESTAURANT_COMMAND_PATH}
               component={CommandViewList}
             />
             <AuthRoute path={RESTAURANT_TEAM_PATH} component={TeamViewList} />

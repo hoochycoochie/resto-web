@@ -14,6 +14,7 @@ import SubcatSearch from "../../components/subcat/SubcatSearch";
 import SubcatCreate from "../../components/subcat/SubcatCreate";
 import { createSubcatMutation } from "../../graphql/mutation/subcat";
 import ApolloCacheUpdater from "apollo-cache-updater";
+
 function SubcatViewList({
   subcats: { loading, fetchMore, ...rest },
   handleSubmit: handleSubmit2,

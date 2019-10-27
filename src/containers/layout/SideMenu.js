@@ -11,7 +11,8 @@ import {
   RESTAURANT_SUBCAT_PATH,
   RESTAURANT_PRODUCT_PATH,
   RESTAURANT_SUBPROD_PATH,
-  RESTAURANT_COMMAND_PATH
+  RESTAURANT_COMMAND_PATH,
+  RESTAURANT_CREATE_PRODUCT_PATH
 } from "../../utils/static_constants";
 import { FormattedMessage } from "react-intl";
 import { colors } from "../../utils/constants";
@@ -26,12 +27,14 @@ function SideMenu({
       ? rest.smallMenu.smallMenu
       : false;
   const activeStyle = { backgroundColor: colors.VIOLET, color: colors.PINK };
-  const rootActive = pathname.toString() == RESTAURANT_ROOT_PATH;
-  const teamActive = pathname.toString() == RESTAURANT_TEAM_PATH;
-  const subcatActive = pathname.toString() == RESTAURANT_SUBCAT_PATH;
-  const productActive = pathname.toString() == RESTAURANT_PRODUCT_PATH;
- // const subprodActive = pathname.toString() == RESTAURANT_SUBPROD_PATH;
-  const commandActive = pathname.toString() == RESTAURANT_COMMAND_PATH;
+  const rootActive = pathname.toString() === RESTAURANT_ROOT_PATH;
+  const teamActive = pathname.toString() === RESTAURANT_TEAM_PATH;
+  const subcatActive = pathname.toString() === RESTAURANT_SUBCAT_PATH;
+  const productActive = pathname.toString() === RESTAURANT_PRODUCT_PATH;
+  // const subprodActive = pathname.toString() == RESTAURANT_SUBPROD_PATH;
+  const commandActive = pathname.toString() === RESTAURANT_COMMAND_PATH;
+  const createProdActive =
+    pathname.toString() === RESTAURANT_CREATE_PRODUCT_PATH;
   return (
     <div className="parent" style={{ padding: 10, marginTop: 10 }}>
       <div className={(smallMenu ? "small-side " : "") + "side"}>
@@ -43,6 +46,17 @@ function SideMenu({
         >
           <Menu.Item
             as={Link}
+            to={RESTAURANT_CREATE_PRODUCT_PATH}
+            name="dashboard"
+            active={commandActive}
+            style={createProdActive ? activeStyle : {}}
+          >
+            <TextIcon hideText={smallMenu} name="plus">
+              <FormattedMessage id="create_product" />
+            </TextIcon>
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
             to={RESTAURANT_COMMAND_PATH}
             name="dashboard"
             active={commandActive}
@@ -52,6 +66,7 @@ function SideMenu({
               <FormattedMessage id="commands" />
             </TextIcon>
           </Menu.Item>
+
           <Menu.Item
             as={Link}
             to={RESTAURANT_ROOT_PATH}

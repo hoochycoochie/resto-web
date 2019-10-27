@@ -98,7 +98,11 @@ export default {
     create: "Create",
     name_exists_already: "this name already exists",
     subproduct_list: "Subproducts list",
-    settings: "Settings"
+    settings: "Settings",
+    create_product: "Create Product",
+    has_choice_size: "Are there different sizes or types ?",
+    sizes_required: "Types or sizes are required",
+    add_sizes_type: "Add types"
   },
 
   fr: {
@@ -251,6 +255,11 @@ export default {
     create: "Enregistrer",
     name_exists_already: "Ce nom existe déjà",
     subproduct_list: "Liste des sous produits",
-    settings: "Paramétrage"
+    settings: "Paramétrage",
+    create_product: "Créer un produit",
+    has_choice_size: "Ya t il des choix de tailles ou types",
+    sizes_required:
+      "Si vous cochez l'existence de types ou tailles, l'ajout est obligatoire",
+    add_sizes_type: "Ajouter"
   }
 };

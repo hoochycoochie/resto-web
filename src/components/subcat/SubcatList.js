@@ -36,9 +36,18 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
             {data.map(d => (
               <Table.Row key={d.id}>
                 <Table.Cell
+                  style={{ fontSize: 10 }}
                   as={Link}
                   to={`${RESTAURANT_SUBPROD_PATH_WITH_PARAMS}${d.id}`}
                 >
+                  <Button
+                    icon="eye"
+                    style={{ fontSize: 10, color: colors.VIOLET }}
+                    size="small"
+                  />
+                  <Icon />
+                </Table.Cell>
+                <Table.Cell>
                   <Label>{d.name}</Label>
                 </Table.Cell>
                 <Table.Cell>

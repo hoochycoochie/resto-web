@@ -1,7 +1,8 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Form, Input, Message, Button } from "semantic-ui-react";
+import { Form, Input, Button } from "semantic-ui-react";
 import { colors } from "../utils/constants";
+import FieldError from "./FieldError";
 
 const FormField = Form.Field;
 
@@ -31,7 +32,7 @@ const Login = ({
         />
 
         {touched.identifiant && errors.identifiant && (
-          <Message color="red">{errors.identifiant}</Message>
+          <FieldError message={errors.identifiant} />
         )}
       </FormField>
 
@@ -50,7 +51,7 @@ const Login = ({
         />
 
         {touched.reference && errors.reference && (
-          <Message color="red">{errors.reference}</Message>
+          <FieldError message={errors.reference} />
         )}
       </FormField>
 
@@ -67,8 +68,9 @@ const Login = ({
           fluid
           onChange={handleChange}
         />
+
         {touched.password && errors.password && (
-          <Message color="red">{errors.password}</Message>
+          <FieldError message={errors.password} />
         )}
       </FormField>
       <Button

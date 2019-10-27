@@ -19,7 +19,8 @@ import {
   RESTAURANT_SUBCAT_PATH,
   RESTAURANT_PRODUCT_PATH,
   RESTAURANT_SUBPROD_PATH,
-  RESTAURANT_COMMAND_PATH
+  RESTAURANT_COMMAND_PATH,
+  RESTAURANT_CREATE_PRODUCT_PATH
 } from "./utils/static_constants";
 import { GET_CURRENT_LANG_QUERY } from "./graphql/store/query-mutation/settings";
 import {
@@ -30,6 +31,7 @@ import {
   SubprodViewList,
   CompanySettingsView
 } from "./containers/resto";
+import ProductViewCreate from "./containers/resto/ProductViewCreate";
 
 class App extends React.Component {
   componentWillMount = async () => {
@@ -81,6 +83,11 @@ class App extends React.Component {
             <AuthRoute
               path={RESTAURANT_SUBPROD_PATH}
               component={SubprodViewList}
+            />
+
+            <AuthRoute
+              path={RESTAURANT_CREATE_PRODUCT_PATH}
+              component={ProductViewCreate}
             />
           </Switch>
         </BrowserRouter>

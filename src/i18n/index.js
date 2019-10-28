@@ -102,7 +102,13 @@ export default {
     create_product: "Create Product",
     has_choice_size: "Are there different sizes or types ?",
     sizes_required: "Types or sizes are required",
-    add_sizes_type: "Add types"
+    add_sizes_type: "Add types",
+    general_condition: "Copy right",
+    has_choice: "Would you like to add options choices ?",
+    category: "Category",
+    max_500_characters: "500 characters maximum length",
+    min_100_characters: "100 characters minimum length",
+    options_required: "options are required"
   },
 
   fr: {
@@ -260,6 +266,13 @@ export default {
     has_choice_size: "Ya t il des choix de tailles ou types",
     sizes_required:
       "Si vous cochez l'existence de types ou tailles, l'ajout est obligatoire",
-    add_sizes_type: "Ajouter"
+    add_sizes_type: "Ajouter",
+    general_condition: "Conditions Générales",
+    has_choice: "Souhaitez ajouter des options dans les choix",
+    category: "Catégorie",
+    max_500_characters: "Maximum 500 caractères",
+    min_100_characters: "Minimum 100 caractères",
+    options_required:
+      "Si vous cochez l'existence d'options, l'ajout d'options est obligatoire"
   }
 };

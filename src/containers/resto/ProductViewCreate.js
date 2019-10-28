@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { withFormik } from "formik";
 import { compose, graphql } from "react-apollo";
@@ -9,9 +9,18 @@ import { createProductMutation } from "../../graphql/mutation/product";
 import createProductSchema from "../../components/product/createProductSchema";
 
 function ProductViewCreate(props) {
+  const [openOptionModale, setOpenOptionModale] = useState(false);
   return (
     <Layout>
-      <ProductCreate {...props} />
+      <ProductCreate
+        {...props}
+        open={async () => {
+          await setOpenOptionModale(true);
+        }}
+        cancel={async () => {
+          await setOpenOptionModale(false);
+        }}
+      />
     </Layout>
   );
 }
@@ -21,13 +30,15 @@ export default compose(
   withFormik({
     validationSchema: createProductSchema,
     mapPropsToValues: () => ({
-      meal_type: null,
       name: "",
       description: "",
+      category_id: "",
       price: null,
       file: null,
       has_choice_size: false,
-      sizes: []
+      has_choice: false,
+      sizes: [],
+      choice: []
     })
   })
 )(ProductViewCreate);

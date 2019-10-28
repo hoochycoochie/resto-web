@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FieldArray } from "formik";
 import { Form, Button, Icon } from "semantic-ui-react";
 import { FormattedMessage } from "react-intl";
 import FieldError from "../FieldError";
 import { colors } from "../../utils/constants";
 
-const SizeInput = ({ values, handleChange, errors }) => {
+function ChoiceInput({ values, handleChange, errors, open, cancel }) {
   return (
     <FieldArray
       name="sizes"
@@ -18,12 +18,13 @@ const SizeInput = ({ values, handleChange, errors }) => {
                 floated="left"
                 icon="plus"
                 style={{ color: colors.VIOLET, marginBottom: 20 }}
-                onClick={() => arrayHelpers.push({ name: "", price: null })}
-                content={<FormattedMessage id="add_sizes_type" />}
+                onClick={async () => {}}
+                content={<FormattedMessage id="add_options" />}
               />
             </div>
+
             <br />
-            {values.length > 0 ? (
+            {values && values.length > 0 ? (
               values.map((size, index) => (
                 <Form.Group
                   widths="equal"
@@ -32,25 +33,12 @@ const SizeInput = ({ values, handleChange, errors }) => {
                 >
                   <Form.Input
                     label={<FormattedMessage id="name" />}
-                    name={`sizes.${index}.name`}
+                    name={`choices.${index}.name`}
                     value={size.name}
                     onChange={handleChange}
                     error={
                       errors && errors[index] && errors[index].name ? (
                         <FieldError message={errors[index].name} />
-                      ) : null
-                    }
-                  />
-
-                  <Form.Input
-                    label={<FormattedMessage id="price" />}
-                    type="number"
-                    name={`sizes.${index}.price`}
-                    value={size.price}
-                    onChange={handleChange}
-                    error={
-                      errors && errors[index] && errors[index].price ? (
-                        <FieldError message={errors[index].price} />
                       ) : null
                     }
                   />
@@ -63,13 +51,15 @@ const SizeInput = ({ values, handleChange, errors }) => {
                 </Form.Group>
               ))
             ) : (
-              <FieldError message={<FormattedMessage id="sizes_required" />} />
+              <FieldError
+                message={<FormattedMessage id="options_required" />}
+              />
             )}
           </div>
         );
       }}
     />
   );
-};
+}
 
-export default SizeInput;
+export default ChoiceInput;

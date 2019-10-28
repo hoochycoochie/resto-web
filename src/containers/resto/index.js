@@ -4,6 +4,7 @@ import SubcatViewList from "./SubcatViewList";
 import TeamViewList from "./TeamViewList";
 import SubprodViewList from "./SubprodViewList";
 import CompanySettingsView from "./CompanySettingsView";
+import ConditionsView from "./ConditionsView";
 
 export {
   TeamViewList,
@@ -11,5 +12,6 @@ export {
   ProductViewList,
   CommandViewList,
   SubprodViewList,
-  CompanySettingsView
+  CompanySettingsView,
+  ConditionsView
 };

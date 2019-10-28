@@ -12,7 +12,8 @@ import {
   RESTAURANT_PRODUCT_PATH,
   RESTAURANT_SUBPROD_PATH,
   RESTAURANT_COMMAND_PATH,
-  RESTAURANT_CREATE_PRODUCT_PATH
+  RESTAURANT_CREATE_PRODUCT_PATH,
+  RESTAURANT_SETTINGS_PATH
 } from "../../utils/static_constants";
 import { FormattedMessage } from "react-intl";
 import { colors } from "../../utils/constants";
@@ -33,6 +34,7 @@ function SideMenu({
   const productActive = pathname.toString() === RESTAURANT_PRODUCT_PATH;
   // const subprodActive = pathname.toString() == RESTAURANT_SUBPROD_PATH;
   const commandActive = pathname.toString() === RESTAURANT_COMMAND_PATH;
+  const settingActive = pathname.toString() === RESTAURANT_SETTINGS_PATH;
   const createProdActive =
     pathname.toString() === RESTAURANT_CREATE_PRODUCT_PATH;
   return (
@@ -46,17 +48,6 @@ function SideMenu({
         >
           <Menu.Item
             as={Link}
-            to={RESTAURANT_CREATE_PRODUCT_PATH}
-            name="dashboard"
-            active={commandActive}
-            style={createProdActive ? activeStyle : {}}
-          >
-            <TextIcon hideText={smallMenu} name="plus">
-              <FormattedMessage id="create_product" />
-            </TextIcon>
-          </Menu.Item>
-          <Menu.Item
-            as={Link}
             to={RESTAURANT_COMMAND_PATH}
             name="dashboard"
             active={commandActive}
@@ -66,7 +57,6 @@ function SideMenu({
               <FormattedMessage id="commands" />
             </TextIcon>
           </Menu.Item>
-
           <Menu.Item
             as={Link}
             to={RESTAURANT_ROOT_PATH}
@@ -74,8 +64,30 @@ function SideMenu({
             active={rootActive}
             style={rootActive ? activeStyle : {}}
           >
+            <TextIcon hideText={smallMenu} name="home">
+              <FormattedMessage id="general_condition" />
+            </TextIcon>
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to={RESTAURANT_SETTINGS_PATH}
+            name="dashboard"
+            active={settingActive}
+            style={settingActive ? activeStyle : {}}
+          >
             <TextIcon hideText={smallMenu} name="settings">
               <FormattedMessage id="settings" />
+            </TextIcon>
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to={RESTAURANT_CREATE_PRODUCT_PATH}
+            name="dashboard"
+            active={commandActive}
+            style={createProdActive ? activeStyle : {}}
+          >
+            <TextIcon hideText={smallMenu} name="plus">
+              <FormattedMessage id="create_product" />
             </TextIcon>
           </Menu.Item>
 

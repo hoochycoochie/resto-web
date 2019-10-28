@@ -23,15 +23,97 @@ const createProductSchema = Yup.object().shape({
     .typeError(<FormattedMessage id="required" />)
     .min(2, <FormattedMessage id="min_2_characters" />)
     .max(50, <FormattedMessage id="max_50_characters" />)
+    .required(<FormattedMessage id="required" />),
 
+  price: Yup.number()
+    .typeError(<FormattedMessage id="required" />)
+    .required(<FormattedMessage id="required" />)
+    .positive(<FormattedMessage id="invalid_number" />)
+    .nullable()
+    .when("has_choice_size", (has_choice_size, schema) => {
+      return has_choice_size === false
+        ? schema
+            .typeError(<FormattedMessage id="required" />)
+            .required(<FormattedMessage id="required" />)
+            .positive(<FormattedMessage id="invalid_number" />)
+        : schema.nullable();
+    }),
+
+  category_id: Yup.string()
+    .trim()
+    .typeError(<FormattedMessage id="required" />)
     .required(<FormattedMessage id="required" />),
   description: Yup.string()
     .trim()
-    .min(2, <FormattedMessage id="min_2_characters" />)
-    .required(<FormattedMessage id="required" />),
+    .min(100, <FormattedMessage id="min_100_characters" />)
+    .required(<FormattedMessage id="required" />)
+    .max(500, <FormattedMessage id="max_500_characters" />),
   has_choice_size: Yup.boolean()
     .typeError(<FormattedMessage id="required" />)
     .required(<FormattedMessage id="required" />),
+
+  has_choice: Yup.boolean()
+    .typeError(<FormattedMessage id="required" />)
+    .required(<FormattedMessage id="required" />),
+
+  choices: Yup.array()
+    .of(
+      Yup.object().shape({
+        name: Yup.string()
+          .trim()
+          .typeError(<FormattedMessage id="required" />)
+          .min(2, <FormattedMessage id="min_2_characters" />)
+          .max(50, <FormattedMessage id="max_50_characters" />)
+          .required(<FormattedMessage id="required" />),
+        subcat_id: Yup.number()
+          .typeError(<FormattedMessage id="required" />)
+          .required(<FormattedMessage id="required" />)
+          .positive(<FormattedMessage id="invalid_number" />),
+        choice_mandatory: Yup.boolean()
+          .default(false)
+          .typeError(<FormattedMessage id="required" />)
+          .required(<FormattedMessage id="required" />),
+        choice_number: Yup.number().required(
+          <FormattedMessage id="required" />
+        ),
+        choice_multiple: Yup.boolean()
+          .default(false)
+          .typeError(<FormattedMessage id="required" />)
+          .required(<FormattedMessage id="required" />),
+
+        subprods: Yup.array()
+          .of(
+            Yup.object().shape({
+              name: Yup.string()
+                .trim()
+                .typeError(<FormattedMessage id="required" />)
+                .min(2, <FormattedMessage id="min_2_characters" />)
+                .max(50, <FormattedMessage id="max_50_characters" />), // these constraints take precedence
+              price: Yup.number()
+                .typeError(<FormattedMessage id="required" />)
+                .required(<FormattedMessage id="required" />)
+                .positive(<FormattedMessage id="invalid_number" />),
+              free_choice: Yup.boolean()
+                .default(false)
+                .typeError(<FormattedMessage id="required" />)
+                .required(<FormattedMessage id="required" />)
+            })
+          )
+          .nullable()
+          .when("subcat_id", (subcat_id, schema) => {
+            return subcat_id
+              ? schema.required(<FormattedMessage id="required" />)
+              : schema.nullable();
+          })
+          .nullable()
+      })
+    )
+    .when("has_choice", (has_choice, schema) => {
+      return has_choice
+        ? schema.required(<FormattedMessage id="required" />)
+        : schema.nullable();
+    })
+    .nullable(),
   sizes: Yup.array()
     .of(
       Yup.object().shape({

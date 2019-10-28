@@ -3,6 +3,7 @@ const USER_STORAGE = "kdkdoekdoekodoeode";
 const COMPANY_ID_STORAGE = "eeeeeeee";
 
 const RESTAURANT_ROOT_PATH = "/restaurant";
+const RESTAURANT_SETTINGS_PATH = "/restaurant/settings";
 const RESTAURANT_COMMAND_PATH = "/restaurant/command";
 const RESTAURANT_TEAM_PATH = "/restaurant/team";
 const RESTAURANT_SUBCAT_PATH = "/restaurant/subcats";
@@ -27,5 +28,6 @@ export {
   NOT_FOUND_PATH,
   RESTAURANT_SUBPROD_PATH_WITH_PARAMS,
   RESTAURANT_COMMAND_PATH,
-  RESTAURANT_CREATE_PRODUCT_PATH
+  RESTAURANT_CREATE_PRODUCT_PATH,
+  RESTAURANT_SETTINGS_PATH
 };

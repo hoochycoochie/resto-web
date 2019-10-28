@@ -11,8 +11,9 @@ import {
 import { colors } from "../../utils/constants";
 import FieldError from "../FieldError";
 import { FormattedMessage } from "react-intl";
-import { FieldArray, Field } from "formik";
 import SizeInput from "./SizeInput";
+import ChoiceInput from "./ChoiceInput";
+import CategoryListInput from "./CategoryListInput";
 const FormField = Form.Field;
 
 const ProductCreate = ({
@@ -23,10 +24,17 @@ const ProductCreate = ({
   handleBlur,
   handleSubmit,
   setFieldValue,
-  isSubmitting
+  isSubmitting,
+  open,
+  cancel
 }) => {
-  console.log("errors", errors);
-
+  console.log("values", values);
+  const isEmpty = obj => {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
+  };
   return (
     <Grid columns={2} divided>
       <Grid.Row>
@@ -41,7 +49,6 @@ const ProductCreate = ({
                 // icon="setting"
                 value={values.name}
                 name="name"
-                
                 onChange={handleChange}
                 onBlur={handleBlur}
                 error={touched.name && errors.name}
@@ -52,6 +59,47 @@ const ProductCreate = ({
               )}
             </FormField>
 
+            <FormField required>
+              <label>
+                <FormattedMessage id="category" />
+              </label>
+
+              <CategoryListInput
+                error={
+                  touched &&
+                  touched.errors &&
+                  touched.errors.category_id &&
+                  errors &&
+                  errors.category_id
+                }
+                setFieldValue={setFieldValue}
+              />
+
+              {touched.category_id && errors.category_id && (
+                <FieldError message={errors.category_id} />
+              )}
+            </FormField>
+            {!values.has_choice_size && (
+              <FormField required>
+                <label>
+                  <FormattedMessage id="price" />
+                </label>
+
+                <Input
+                  type="number"
+                  label={{ basic: true, content: "cfa" }}
+                  labelPosition="right"
+                  value={values.price}
+                  name="price"
+                  fluid
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {touched.price && errors.price && (
+                  <FieldError message={errors.price} />
+                )}
+              </FormField>
+            )}
             <FormField>
               <Checkbox
                 name="has_choice_size"
@@ -65,21 +113,13 @@ const ProductCreate = ({
                   </label>
                 }
               />
-              )
-              {/* {touched.sizes && errors.sizes && (
-                <FieldError message={errors.sizes} />
-              )}
-              {errors.sizes && typeof errors.sizes === "string" && (
-                <FieldError message={errors.sizes} />
-              )} */}
             </FormField>
 
             {values.has_choice_size && (
               <SizeInput
-                values={values}
-                errors={errors}
+                values={values.sizes}
+                errors={errors && errors.sizes ? errors.sizes : null}
                 handleChange={handleChange}
-                touched={touched}
               />
             )}
 
@@ -103,6 +143,31 @@ const ProductCreate = ({
             </FormField>
 
             <FormField>
+              <Checkbox
+                name="has_choice"
+                id="has_choice"
+                toggle
+                onChange={handleChange}
+                checked={values.has_choice}
+                label={
+                  <label>
+                    <FormattedMessage id="has_choice" />
+                  </label>
+                }
+              />
+            </FormField>
+
+            {values.has_choice && (
+              <ChoiceInput
+                open={open}
+                cancel={cancel}
+                values={values}
+                errors={errors}
+                handleChange={handleChange}
+                touched={touched}
+              />
+            )}
+            <FormField>
               <label>
                 <FormattedMessage id="picture" />
               </label>
@@ -110,7 +175,6 @@ const ProductCreate = ({
               <Input
                 type="file"
                 name="file"
-                //  onChange={handleChange}
                 onChange={async ({
                   target: {
                     validity,
@@ -118,7 +182,6 @@ const ProductCreate = ({
                   }
                 }) => {
                   await setFieldValue("file", file);
-                  //  await handleSubmit();
                 }}
                 fluid
                 onBlur={handleBlur}
@@ -139,6 +202,7 @@ const ProductCreate = ({
               </FormField>
             )}
             <Button
+              disabled={isEmpty(errors) ? false : true}
               type="submit"
               style={{ backgroundColor: colors.VIOLET, color: colors.PINK }}
             >

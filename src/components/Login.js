@@ -29,6 +29,7 @@ const Login = ({
           fluid
           onChange={handleChange}
           onBlur={handleBlur}
+          error={touched.identifiant && errors.identifiant ? true : false}
         />
 
         {touched.identifiant && errors.identifiant && (
@@ -48,6 +49,7 @@ const Login = ({
           fluid
           onChange={handleChange}
           onBlur={handleBlur}
+          error={touched.reference && errors.reference ? true : false}
         />
 
         {touched.reference && errors.reference && (
@@ -67,6 +69,7 @@ const Login = ({
           name="password"
           fluid
           onChange={handleChange}
+          error={touched.password && errors.password ? true : false}
         />
 
         {touched.password && errors.password && (

@@ -26,15 +26,17 @@ const ProductCreate = ({
   setFieldValue,
   isSubmitting,
   open,
+  openModal,
   cancel
 }) => {
-  console.log("values", values);
+  //console.log("values", values);
   const isEmpty = obj => {
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) return false;
     }
     return true;
   };
+
   return (
     <Grid columns={2} divided>
       <Grid.Row>
@@ -132,7 +134,7 @@ const ProductCreate = ({
                 icon="setting"
                 value={values.description}
                 name="description"
-                fluid={true}
+                fluid={1}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -161,10 +163,12 @@ const ProductCreate = ({
               <ChoiceInput
                 open={open}
                 cancel={cancel}
-                values={values}
-                errors={errors}
+                values={values.choices}
+                errors={errors && errors.choices ? errors.choices : null}
                 handleChange={handleChange}
+                setFieldValue={setFieldValue}
                 touched={touched}
+                openModal={openModal}
               />
             )}
             <FormField>

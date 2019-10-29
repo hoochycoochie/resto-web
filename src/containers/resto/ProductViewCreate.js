@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-
 import { withFormik } from "formik";
 import { compose, graphql } from "react-apollo";
-
 import Layout from "../layout/layoutadmin";
 import ProductCreate from "../../components/product/ProductCreate";
 import { createProductMutation } from "../../graphql/mutation/product";
@@ -14,11 +12,12 @@ function ProductViewCreate(props) {
     <Layout>
       <ProductCreate
         {...props}
-        open={async () => {
-          await setOpenOptionModale(true);
-        }}
+        open={openOptionModale}
         cancel={async () => {
           await setOpenOptionModale(false);
+        }}
+        openModal={async () => {
+          await setOpenOptionModale(true);
         }}
       />
     </Layout>
@@ -33,12 +32,12 @@ export default compose(
       name: "",
       description: "",
       category_id: "",
-      price: null,
-      file: null,
+      price: "",
+      file: "",
       has_choice_size: false,
       has_choice: false,
       sizes: [],
-      choice: []
+      choices: []
     })
   })
 )(ProductViewCreate);

@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Modal, Form, Input, Message } from "semantic-ui-react";
 import { colors } from "../../utils/constants";
 import { FormattedMessage } from "react-intl";
+import FieldError from "../FieldError";
 const FormField = Form.Field;
 
 const SubcatCreate = ({
@@ -45,7 +46,7 @@ const SubcatCreate = ({
             />
 
             {touched.name && errors.name && (
-              <Message color="red">{errors.name}</Message>
+              <FieldError message={errors.name} />
             )}
           </FormField>
 

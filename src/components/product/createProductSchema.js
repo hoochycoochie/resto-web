@@ -62,13 +62,14 @@ const createProductSchema = Yup.object().shape({
         name: Yup.string()
           .trim()
           .typeError(<FormattedMessage id="required" />)
+
           .min(2, <FormattedMessage id="min_2_characters" />)
           .max(50, <FormattedMessage id="max_50_characters" />)
           .required(<FormattedMessage id="required" />),
-        subcat_id: Yup.number()
+        subcat_id: Yup.string()
+          .trim()
           .typeError(<FormattedMessage id="required" />)
-          .required(<FormattedMessage id="required" />)
-          .positive(<FormattedMessage id="invalid_number" />),
+          .required(<FormattedMessage id="required" />),
         choice_mandatory: Yup.boolean()
           .default(false)
           .typeError(<FormattedMessage id="required" />)
@@ -89,6 +90,11 @@ const createProductSchema = Yup.object().shape({
                 .typeError(<FormattedMessage id="required" />)
                 .min(2, <FormattedMessage id="min_2_characters" />)
                 .max(50, <FormattedMessage id="max_50_characters" />), // these constraints take precedence
+
+              subprod_id: Yup.string()
+                .trim()
+                .typeError(<FormattedMessage id="required" />)
+                .required(<FormattedMessage id="required" />),
               price: Yup.number()
                 .typeError(<FormattedMessage id="required" />)
                 .required(<FormattedMessage id="required" />)

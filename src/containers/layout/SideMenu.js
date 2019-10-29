@@ -3,7 +3,10 @@ import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import TextIcon from "./TextIcon";
 import { graphql, compose } from "react-apollo";
-import { GET_CURRENT_MENU_QUERY } from "../../graphql/store/query-mutation/settings";
+import {
+  GET_CURRENT_MENU_QUERY,
+  TOGGLE_MENU_MUTATION
+} from "../../graphql/store/query-mutation/settings";
 import { withRouter } from "react-router-dom";
 import {
   RESTAURANT_ROOT_PATH,
@@ -20,6 +23,7 @@ import { colors } from "../../utils/constants";
 
 function SideMenu({
   children,
+  toggle,
   menu: { loading, ...rest },
   location: { pathname }
 }) {
@@ -81,6 +85,7 @@ function SideMenu({
           </Menu.Item>
           <Menu.Item
             as={Link}
+            onClick={async () => await toggle()}
             to={RESTAURANT_CREATE_PRODUCT_PATH}
             name="dashboard"
             active={commandActive}
@@ -145,6 +150,7 @@ function SideMenu({
   );
 }
 
-export default compose(graphql(GET_CURRENT_MENU_QUERY, { name: "menu" }))(
-  withRouter(SideMenu)
-);
+export default compose(
+  graphql(GET_CURRENT_MENU_QUERY, { name: "menu" }),
+  graphql(TOGGLE_MENU_MUTATION, { name: "toggle" })
+)(withRouter(SideMenu));

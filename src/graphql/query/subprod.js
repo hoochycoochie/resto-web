@@ -37,3 +37,13 @@ export const findSubprodQuery = gql`
     }
   }
 `;
+
+export const subprodsQuery = gql`
+  query subprods($subcat_id: String) {
+    subprods(subcat_id: $subcat_id) {
+      id
+      name
+      price
+    }
+  }
+`;

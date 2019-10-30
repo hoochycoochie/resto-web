@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FieldArray } from "formik";
 import { Button } from "semantic-ui-react";
 import { FormattedMessage } from "react-intl";

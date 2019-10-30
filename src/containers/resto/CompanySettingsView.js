@@ -1,6 +1,6 @@
 import React from "react";
-import * as Yup from "yup";
-import { withFormik } from "formik";
+// import * as Yup from "yup";
+// import { withFormik } from "formik";
 import { compose, graphql } from "react-apollo";
 import Layout from "../layout/layoutadmin";
 import { Grid, Image, Card, Icon } from "semantic-ui-react";

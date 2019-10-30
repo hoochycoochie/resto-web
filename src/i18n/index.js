@@ -114,7 +114,8 @@ export default {
     choice_mandatory: "Is option mandatory",
     subcat_name: "Sub category",
     subprods: "Subproducts",
-    subprod_required: "You must choose sub products"
+    subprod_required: "You must choose sub products",
+    selected_subprods: "Selected sub products"
   },
 
   fr: {
@@ -285,6 +286,7 @@ export default {
     choice_mandatory: "L'option est elle obligatoire ?",
     subcat_name: "Sous catégorie",
     subprods: "Sous produits",
-    subprod_required: "Il faut choisir des sous produits"
+    subprod_required: "Il faut choisir des sous produits",
+    selected_subprods: "Sous produits sélectionnés"
   }
 };

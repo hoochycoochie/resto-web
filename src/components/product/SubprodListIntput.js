@@ -8,7 +8,8 @@ const SubprodListInput = ({
   prods: { loading, subprods },
   setFieldValue,
   error,
-  inputName
+  inputName,
+  values
 }) => {
   const [name, setName] = useState("");
   const [selected, setSelected] = useState([]);
@@ -42,6 +43,8 @@ const SubprodListInput = ({
           text: cat.name
         }))
       : [];
+  const selectedValues =
+    values && values.length > 0 ? values.map(cat => cat.subprod_id) : [];
 
   return (
     <div>
@@ -52,6 +55,8 @@ const SubprodListInput = ({
         multiple
         search
         selection
+        defaultUpward={true}
+        value={selectedValues}
         onChange={handleChange}
         name={inputName}
         id={inputName}

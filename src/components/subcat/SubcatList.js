@@ -76,7 +76,7 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
                   <Icon />
                 </Table.Cell>
 
-                {d.subprod_count == 0 && (
+                {d.subprod_count === 0 && (
                   <Table.Cell>
                     <Button
                       icon="remove"

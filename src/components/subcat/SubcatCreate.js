@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, Form, Input, Message } from "semantic-ui-react";
+import { Button, Modal, Form, Input } from "semantic-ui-react";
 import { colors } from "../../utils/constants";
 import { FormattedMessage } from "react-intl";
 import FieldError from "../FieldError";

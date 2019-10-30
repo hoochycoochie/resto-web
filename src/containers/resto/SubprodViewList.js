@@ -85,7 +85,7 @@ function SubprodViewList({
     const search = e.target.value;
 
     await setName(search);
-    if (search.trim().length == 0) {
+    if (search.trim().length === 0) {
       await load({});
     }
   };
@@ -188,7 +188,7 @@ function SubprodViewList({
       <SubprodSearch
         modal={async () => await setCreateModal(true)}
         name={name}
-        disabled={!name || name.trim().length == 0}
+        disabled={!name || name.trim().length === 0}
         onClick={onSearch}
         onChange={onSearchChange}
       />

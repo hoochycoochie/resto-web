@@ -5,6 +5,7 @@ import { FormattedMessage } from "react-intl";
 import SubcatListInput from "./SubcatListInput";
 import SubprodListIntput from "./SubprodListIntput";
 import { FieldArray } from "formik";
+import SubprodForm from "./SubprodForm";
 
 const FormField = Form.Field;
 
@@ -45,7 +46,6 @@ const ChoiceForm = ({ choice, errors, handleChange, index, setFieldValue }) => {
           <FieldError message={errors[index].subcat_id} />
         )}
       </FormField>
-
       {choice.subcat_id && (
         <FormField>
           <label>
@@ -55,17 +55,34 @@ const ChoiceForm = ({ choice, errors, handleChange, index, setFieldValue }) => {
             inputName={`choices.${index}.subprods`}
             subcat_id={choice.subcat_id}
             setFieldValue={setFieldValue}
+            values={
+              choice.subprods && choice.subprods.length > 0
+                ? choice.subprods
+                : []
+            }
           />
         </FormField>
       )}
       {choice.subcat_id && (
         <FieldArray
-          name="friends"
+          name={`choices.${index}.subprods`}
           render={arrayHelpers => (
-            <div>
+            <div style={{ textAlign: "center" }}>
+              <span>
+                <FormattedMessage id="selected_subprods" />
+              </span>
               {choice.subprods && choice.subprods.length > 0 ? (
-                choice.subprods.map((prod, index) => {
-                  return <h1 key={index}>{prod.name}</h1>;
+                choice.subprods.map((prod, i) => {
+                  return (
+                    <SubprodForm
+                      inputName={`choices.${index}.subprods[${i}].free_choice`}
+                      subprod={prod}
+                      setFieldValue={setFieldValue}
+                      index={i}
+                      key={i}
+                      arrayHelpers={arrayHelpers}
+                    />
+                  );
                 })
               ) : (
                 <div>
@@ -78,6 +95,7 @@ const ChoiceForm = ({ choice, errors, handleChange, index, setFieldValue }) => {
           )}
         />
       )}
+
       <FormField>
         <Checkbox
           name={`choices.${index}.choice_mandatory`}

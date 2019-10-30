@@ -19,7 +19,10 @@ const SubcatListInput = ({
           text: cat.name
         }))
       : [];
-
+  const currentValue =
+    options.length > 0
+      ? options.find(c => c.key.toString() === currentName.toString())
+      : null;
   return (
     <div>
       <Dropdown
@@ -28,11 +31,7 @@ const SubcatListInput = ({
         fluid
         search
         selection
-        value={
-          options.length > 0
-            ? options.find(c => c.key.toString() === currentName.toString())
-            : null
-        }
+        value={currentValue}
         name={inputName}
         id={inputName}
         onChange={async (_, { name, value }) => {

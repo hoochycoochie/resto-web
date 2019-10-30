@@ -12,6 +12,7 @@
     "apollo-link-http": "^1.5.11",
     "apollo-link-state": "0.4.2",
     "apollo-link-ws": "^1.0.14",
+    "apollo-upload-client": "^11.0.0",
     "apollo-utilities": "^1.2.1",
     "formik": "^1.5.8",
     "graphql": "^14.1.1",

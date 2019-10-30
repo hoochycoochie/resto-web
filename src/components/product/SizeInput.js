@@ -10,57 +10,77 @@ const SizeInput = ({ values, handleChange, errors }) => {
     <FieldArray
       name="sizes"
       render={arrayHelpers => {
-        console.log("values.sizes", values.sizes);
         return (
           <div style={{ textAlign: "center" }}>
-            <div>
+            <div style={{ marginBottom: 50 }}>
               <Button
                 floated="left"
                 icon="plus"
-                style={{ color: colors.VIOLET, marginBottom: 20 }}
-                onClick={() => arrayHelpers.push({ name: "", price: null })}
+                style={{
+                  backgroundColor: colors.PINK,
+                  color: colors.VIOLET,
+                  marginBottom: 50
+                }}
+                onClick={() =>
+                  arrayHelpers.push({ name: "", price: undefined })
+                }
                 content={<FormattedMessage id="add_sizes_type" />}
               />
             </div>
             <br />
+            <br />
+
             {values.length > 0 ? (
               values.map((size, index) => (
-                <Form.Group
-                  widths="equal"
+                <div
                   key={index}
-                  style={{ marginTop: 20 }}
+                  style={{
+                    textAlign: "center"
+                  }}
                 >
-                  <Form.Input
-                    label={<FormattedMessage id="name" />}
-                    name={`sizes.${index}.name`}
-                    value={size.name}
-                    onChange={handleChange}
-                    error={
-                      errors && errors[index] && errors[index].name ? (
-                        <FieldError message={errors[index].name} />
-                      ) : null
-                    }
-                  />
+                  <div size="tiny" style={{ padding: 10 }}>
+                    <Form.Group
+                      widths="equal"
+                      key={index}
+                      style={{ marginTop: 40 }}
+                    >
+                      <Form.Input
+                        label={<FormattedMessage id="name" />}
+                        name={`sizes.${index}.name`}
+                        value={size.name}
+                        onChange={handleChange}
+                        error={
+                          errors && errors[index] && errors[index].name ? (
+                            <FieldError message={errors[index].name} />
+                          ) : null
+                        }
+                      />
 
-                  <Form.Input
-                    label={<FormattedMessage id="price" />}
-                    type="number"
-                    name={`sizes.${index}.price`}
-                    value={size.price}
-                    onChange={handleChange}
-                    error={
-                      errors && errors[index] && errors[index].price ? (
-                        <FieldError message={errors[index].price} />
-                      ) : null
-                    }
-                  />
+                      <Form.Input
+                        label={<FormattedMessage id="price" />}
+                        type="number"
+                        name={`sizes.${index}.price`}
+                        value={size.price}
+                        onChange={handleChange}
+                        error={
+                          errors && errors[index] && errors[index].price ? (
+                            <FieldError message={errors[index].price} />
+                          ) : null
+                        }
+                      />
 
-                  <Icon
-                    style={{ fontSize: 20, color: colors.RED, marginTop: 25 }}
-                    name="delete"
-                    onClick={async () => await arrayHelpers.remove(index)}
-                  />
-                </Form.Group>
+                      <Icon
+                        style={{
+                          fontSize: 20,
+                          color: colors.RED,
+                          marginTop: 25
+                        }}
+                        name="delete"
+                        onClick={async () => await arrayHelpers.remove(index)}
+                      />
+                    </Form.Group>
+                  </div>
+                </div>
               ))
             ) : (
               <FieldError message={<FormattedMessage id="sizes_required" />} />

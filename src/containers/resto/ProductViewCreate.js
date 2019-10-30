@@ -5,21 +5,13 @@ import Layout from "../layout/layoutadmin";
 import ProductCreate from "../../components/product/ProductCreate";
 import { createProductMutation } from "../../graphql/mutation/product";
 import createProductSchema from "../../components/product/createProductSchema";
+import { COMPANY_ID_STORAGE } from "../../utils/static_constants";
+import { FormattedMessage } from "react-intl";
 
 function ProductViewCreate(props) {
-  const [openOptionModale, setOpenOptionModale] = useState(false);
   return (
     <Layout>
-      <ProductCreate
-        {...props}
-        open={openOptionModale}
-        cancel={async () => {
-          await setOpenOptionModale(false);
-        }}
-        openModal={async () => {
-          await setOpenOptionModale(true);
-        }}
-      />
+      <ProductCreate {...props} />
     </Layout>
   );
 }
@@ -38,6 +30,66 @@ export default compose(
       has_choice: false,
       sizes: [],
       choices: []
-    })
+    }),
+    handleSubmit: async (
+      {
+        name,
+        description,
+        price,
+        file,
+        has_choice,
+        has_choice_size,
+        choices,
+        sizes,
+        category_id
+      },
+      { props: { save, history }, setSubmitting, setFieldError }
+    ) => {
+      try {
+        const company_id = await JSON.parse(
+          localStorage.getItem(COMPANY_ID_STORAGE)
+        );
+        let variables = {
+          product: {
+            name,
+            description,
+
+            has_choice,
+            has_choice_size,
+
+            category_id
+          },
+          company_id
+        };
+        if (file) {
+          variables.product.file = file;
+        }
+        if (!has_choice_size) {
+          variables.product.price = price;
+        } else {
+          variables.product.sizes = sizes;
+        }
+        if (has_choice) {
+          variables.product.choices = choices;
+        }
+
+        const response = await save({ variables });
+        console.log("response", response);
+        const { ok, errors } = response.data.createProduct;
+        if (ok) {
+          await setSubmitting(false);
+          // await handleReset();
+          // await setCreateModal(false);
+        } else {
+          errors.forEach(error => {
+            const message = <FormattedMessage id={error.message} />;
+            setFieldError(error.path, message);
+            setSubmitting(false);
+          });
+        }
+      } catch (error) {
+        console.log("error saving product", error);
+      }
+    }
   })
 )(ProductViewCreate);

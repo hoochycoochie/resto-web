@@ -3,6 +3,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { setContext } from "apollo-link-context";
 import { split, ApolloLink } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
+import { createUploadLink } from "apollo-upload-client";
 import { WebSocketLink } from "apollo-link-ws";
 import { withClientState } from "apollo-link-state";
 import { onError } from "apollo-link-error";
@@ -79,7 +80,7 @@ export const wsLink = new WebSocketLink({
   }
 });
 
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
   uri: graphqlUrl
 });
 const errorLink = onError(({ graphQLErrors }) => {

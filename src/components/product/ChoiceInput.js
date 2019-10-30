@@ -31,9 +31,10 @@ function ChoiceInput({
                 }}
                 disabled={errors && errors.length ? true : false}
                 onClick={async () => {
-                  await arrayHelpers.unshift({
+                  await arrayHelpers.push({
                     name: "",
                     subcat_id: "",
+                    choice_number:"",
                     choice_mandatory: false,
                     choice_multiple: false,
                     subprods: []
@@ -66,6 +67,7 @@ function ChoiceInput({
                     index={index}
                     setFieldValue={setFieldValue}
                     setFieldError={setFieldError}
+                    arrayHelpers={arrayHelpers}
                   />
                 </div>
               ))

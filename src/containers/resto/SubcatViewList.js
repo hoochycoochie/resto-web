@@ -166,9 +166,7 @@ function SubcatViewList({
             textAlign: "center",
             fontStyle: "italic"
           }}
-        >
-          total : {total}
-        </Header>
+        ></Header>
       </div>
 
       <SubcatSearch

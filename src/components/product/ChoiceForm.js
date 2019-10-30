@@ -1,11 +1,12 @@
 import React from "react";
-import { Form, Input, Checkbox, Header } from "semantic-ui-react";
+import { Form, Input, Checkbox, Header, Icon } from "semantic-ui-react";
 import FieldError from "../FieldError";
 import { FormattedMessage } from "react-intl";
 import SubcatListInput from "./SubcatListInput";
 import SubprodListIntput from "./SubprodListIntput";
 import { FieldArray } from "formik";
 import SubprodForm from "./SubprodForm";
+import { colors } from "../../utils/constants";
 
 const FormField = Form.Field;
 
@@ -15,7 +16,8 @@ const ChoiceForm = ({
   handleChange,
   index,
   setFieldValue,
-  setFieldError
+  setFieldError,
+  arrayHelpers
 }) => {
   const choice_number_range = choice.subprods.length
     ? Array.from(choice.subprods, (_, index) => ({
@@ -32,10 +34,17 @@ const ChoiceForm = ({
         )
       : null;
   const readOnlyChoiceNumber = choice.choice_multiple ? false : true;
-  console.log("current_choice_number", current_choice_number);
+
   return (
     <div size="tiny" style={{ padding: 10 }}>
       <Header content={`option ${index + 1}`} />
+      <div style={{ float: "right" }}>
+        <Icon
+          style={{ fontSize: 20, color: colors.RED, marginTop: 10 }}
+          name="delete"
+          onClick={async () => await arrayHelpers.remove(index)}
+        />
+      </div>
       <FormField>
         <label>
           <FormattedMessage id="name" />

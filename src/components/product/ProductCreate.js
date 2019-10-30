@@ -30,7 +30,7 @@ const ProductCreate = ({
   openModal,
   cancel
 }) => {
-  //console.log("values", values);
+  console.log("errors", errors);
   const isEmpty = obj => {
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) return false;
@@ -216,9 +216,9 @@ const ProductCreate = ({
             </Button>
           </Form>
         </Grid.Column>
-        <Grid.Column>
+        {/* <Grid.Column>
           {values.file && <Image src={URL.createObjectURL(values.file)} />}
-        </Grid.Column>
+        </Grid.Column> */}
       </Grid.Row>
     </Grid>
   );

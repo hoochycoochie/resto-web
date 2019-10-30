@@ -24,14 +24,20 @@ const createProductSchema = Yup.object().shape({
     .min(2, <FormattedMessage id="min_2_characters" />)
     .max(50, <FormattedMessage id="max_50_characters" />)
     .required(<FormattedMessage id="required" />),
-
-  price: Yup.number()
+  has_choice_size: Yup.boolean()
     .typeError(<FormattedMessage id="required" />)
-    .required(<FormattedMessage id="required" />)
+    .required(<FormattedMessage id="required" />),
+  has_choice: Yup.boolean()
+    .typeError(<FormattedMessage id="required" />)
+    .required(<FormattedMessage id="required" />),
+  price: Yup.number()
+    .default(undefined)
+    .typeError(<FormattedMessage id="required" />)
     .positive(<FormattedMessage id="invalid_number" />)
     .nullable()
     .when("has_choice_size", (has_choice_size, schema) => {
-      return has_choice_size === false
+      console.log("has_choice_size", has_choice_size);
+      return !has_choice_size
         ? schema
             .typeError(<FormattedMessage id="required" />)
             .required(<FormattedMessage id="required" />)
@@ -48,13 +54,6 @@ const createProductSchema = Yup.object().shape({
     .min(100, <FormattedMessage id="min_100_characters" />)
     .required(<FormattedMessage id="required" />)
     .max(500, <FormattedMessage id="max_500_characters" />),
-  has_choice_size: Yup.boolean()
-    .typeError(<FormattedMessage id="required" />)
-    .required(<FormattedMessage id="required" />),
-
-  has_choice: Yup.boolean()
-    .typeError(<FormattedMessage id="required" />)
-    .required(<FormattedMessage id="required" />),
 
   choices: Yup.array()
     .of(
@@ -74,9 +73,10 @@ const createProductSchema = Yup.object().shape({
           .default(false)
           .typeError(<FormattedMessage id="required" />)
           .required(<FormattedMessage id="required" />),
-        choice_number: Yup.number().required(
-          <FormattedMessage id="required" />
-        ),
+        choice_number: Yup.number()
+          .typeError(<FormattedMessage id="required" />)
+          .positive(<FormattedMessage id="invalid_number" />)
+          .required(<FormattedMessage id="required" />),
         choice_multiple: Yup.boolean()
           .default(false)
           .typeError(<FormattedMessage id="required" />)

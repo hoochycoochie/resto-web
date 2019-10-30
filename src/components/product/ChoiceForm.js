@@ -17,8 +17,6 @@ const ChoiceForm = ({
   setFieldValue,
   setFieldError
 }) => {
-  console.log("choice", choice);
-
   const choice_number_range = choice.subprods.length
     ? Array.from(choice.subprods, (_, index) => ({
         key: index,
@@ -27,10 +25,10 @@ const ChoiceForm = ({
       }))
     : [];
 
-  const current_choice_number =
+  let current_choice_number =
     choice.choice_number && choice_number_range.length > 0
       ? choice_number_range.find(
-          c => c.key.toString() === choice.choice_number.toString()
+          c => c.value.toString() === choice.choice_number.toString()
         )
       : null;
   const readOnlyChoiceNumber = choice.choice_multiple ? false : true;
@@ -164,15 +162,9 @@ const ChoiceForm = ({
             openOnFocus={false}
             selectOnBlur={false}
             options={choice_number_range}
-            value={
-              current_choice_number && current_choice_number.value
-                ? current_choice_number.value
-                : null
-            }
             onChange={async (_, { name, value }) => {
-              console.log("value", value);
               if (!choice.choice_multiple && parseInt(value) > 1) {
-                setFieldError(
+                await setFieldError(
                   `choices.${index}.choice_number`,
                   <FormattedMessage id="choice_multipe_error" />
                 );
@@ -183,6 +175,11 @@ const ChoiceForm = ({
                 );
               }
             }}
+            value={
+              current_choice_number && current_choice_number.value
+                ? current_choice_number.value
+                : null
+            }
           />
           {errors && errors[index] && errors[index].choice_number && (
             <FieldError message={errors[index].choice_number} />

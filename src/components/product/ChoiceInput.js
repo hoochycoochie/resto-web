@@ -6,7 +6,14 @@ import FieldError from "../FieldError";
 import { colors } from "../../utils/constants";
 import ChoiceForm from "./ChoiceForm";
 
-function ChoiceInput({ values, handleChange, errors, touched, setFieldValue }) {
+function ChoiceInput({
+  values,
+  handleChange,
+  errors,
+  touched,
+  setFieldValue,
+  setFieldError
+}) {
   return (
     <FieldArray
       name="choices"
@@ -58,6 +65,7 @@ function ChoiceInput({ values, handleChange, errors, touched, setFieldValue }) {
                     handleChange={handleChange}
                     index={index}
                     setFieldValue={setFieldValue}
+                    setFieldError={setFieldError}
                   />
                 </div>
               ))

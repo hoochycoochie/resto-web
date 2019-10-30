@@ -24,6 +24,7 @@ const ProductCreate = ({
   handleBlur,
   handleSubmit,
   setFieldValue,
+  setFieldError,
   isSubmitting,
   open,
   openModal,
@@ -167,6 +168,7 @@ const ProductCreate = ({
                 errors={errors && errors.choices ? errors.choices : null}
                 handleChange={handleChange}
                 setFieldValue={setFieldValue}
+                setFieldError={setFieldError}
                 touched={touched}
                 openModal={openModal}
               />

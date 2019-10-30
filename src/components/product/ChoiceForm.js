@@ -9,8 +9,32 @@ import SubprodForm from "./SubprodForm";
 
 const FormField = Form.Field;
 
-const ChoiceForm = ({ choice, errors, handleChange, index, setFieldValue }) => {
-  console.log("choice subprods", choice.subprods);
+const ChoiceForm = ({
+  choice,
+  errors,
+  handleChange,
+  index,
+  setFieldValue,
+  setFieldError
+}) => {
+  console.log("choice", choice);
+
+  const choice_number_range = choice.subprods.length
+    ? Array.from(choice.subprods, (_, index) => ({
+        key: index,
+        value: index + 1,
+        text: index + 1
+      }))
+    : [];
+
+  const current_choice_number =
+    choice.choice_number && choice_number_range.length > 0
+      ? choice_number_range.find(
+          c => c.key.toString() === choice.choice_number.toString()
+        )
+      : null;
+  const readOnlyChoiceNumber = choice.choice_multiple ? false : true;
+  console.log("current_choice_number", current_choice_number);
   return (
     <div size="tiny" style={{ padding: 10 }}>
       <Header content={`option ${index + 1}`} />
@@ -124,6 +148,47 @@ const ChoiceForm = ({ choice, errors, handleChange, index, setFieldValue }) => {
           }
         />
       </FormField>
+
+      {choice.subprods.length && (
+        <FormField required>
+          <label>
+            <FormattedMessage id="choice_number_max" />
+          </label>
+
+          <Form.Select
+            readOnly={readOnlyChoiceNumber}
+            name={`choices.${index}.choice_number`}
+            id={`choices.${index}.choice_number`}
+            simple
+            selection
+            openOnFocus={false}
+            selectOnBlur={false}
+            options={choice_number_range}
+            value={
+              current_choice_number && current_choice_number.value
+                ? current_choice_number.value
+                : null
+            }
+            onChange={async (_, { name, value }) => {
+              console.log("value", value);
+              if (!choice.choice_multiple && parseInt(value) > 1) {
+                setFieldError(
+                  `choices.${index}.choice_number`,
+                  <FormattedMessage id="choice_multipe_error" />
+                );
+              } else {
+                await setFieldValue(
+                  `choices.${index}.choice_number`,
+                  parseInt(value)
+                );
+              }
+            }}
+          />
+          {errors && errors[index] && errors[index].choice_number && (
+            <FieldError message={errors[index].choice_number} />
+          )}
+        </FormField>
+      )}
     </div>
   );
 };

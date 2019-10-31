@@ -1,6 +1,5 @@
 import React from "react";
-import { Form, Select, Icon } from "semantic-ui-react";
-import { FormattedMessage } from "react-intl";
+import { Form, Icon } from "semantic-ui-react";
 import { colors } from "../../utils/constants";
 
 const options = [
@@ -9,8 +8,6 @@ const options = [
 ];
 const SubprodForm = ({
   subprod,
-  errors,
-  handleChange,
   index,
   setFieldValue,
   arrayHelpers,

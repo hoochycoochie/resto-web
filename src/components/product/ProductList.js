@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { colors } from "../../utils/constants";
 import { RESTAURANT_SUBPROD_PATH_WITH_PARAMS } from "../../utils/static_constants";
 
-function SubcatList({ data, take, total, activePage, onPageChange }) {
+function ProductList({ data, take, total, activePage, onPageChange }) {
   return (
     <div>
       <Table size="small">
@@ -16,12 +16,9 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
               <FormattedMessage id="name" />
             </Table.HeaderCell>
             <Table.HeaderCell>
-              <FormattedMessage id="subprod_count" />
+              <FormattedMessage id="category" />
             </Table.HeaderCell>
 
-            <Table.HeaderCell>
-              <FormattedMessage id="author" />
-            </Table.HeaderCell>
             <Table.HeaderCell singleLine>
               <FormattedMessage id="created_at" />
             </Table.HeaderCell>
@@ -39,12 +36,9 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
                   <Label>{d.name}</Label>
                 </Table.Cell>
                 <Table.Cell>
-                  <Label>{d.subprod_count}</Label>
+                  <Label>{d.category.name}</Label>
                 </Table.Cell>
 
-                <Table.Cell>
-                  <Label size="tiny">{d.author.name}</Label>
-                </Table.Cell>
                 <Table.Cell>
                   <Label size="tiny">
                     <DisplayDate date={d.created_at} />
@@ -55,33 +49,36 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
                     <DisplayDate date={d.updated_at} />
                   </Label>
                 </Table.Cell>
-                <Table.Cell style={{ fontSize: 10 }}>
-                  <Button
-                    icon="pencil alternate"
-                    style={{ fontSize: 10, color: colors.VIOLET }}
-                    size="small"
-                  />
-                </Table.Cell>
+
                 <Table.Cell
                   style={{ fontSize: 10 }}
-                  as={Link}
-                  to={`${RESTAURANT_SUBPROD_PATH_WITH_PARAMS}${d.id}`}
+                  //   as={Link}
+                  //   to={`${RESTAURANT_SUBPROD_PATH_WITH_PARAMS}${d.id}`}
                 >
                   <Button
                     icon="eye"
                     style={{ fontSize: 10, color: colors.VIOLET }}
                     size="small"
                   />
+                  <Icon />
                 </Table.Cell>
-                {d.subprod_count === 0 && (
-                  <Table.Cell>
-                    <Button
-                      icon="remove"
-                      style={{ fontSize: 10, color: colors.RED }}
-                      size="small"
-                    />
-                  </Table.Cell>
-                )}
+                <Table.Cell style={{ fontSize: 10 }}>
+                  <Button
+                    icon="pencil alternate"
+                    style={{ fontSize: 10, color: colors.VIOLET }}
+                    size="small"
+                  />
+                  <Icon />
+                </Table.Cell>
+
+                <Table.Cell style={{ fontSize: 10 }}>
+                  <Button
+                    icon="delete"
+                    style={{ fontSize: 10, color: colors.RED }}
+                    size="small"
+                  />
+                  <Icon />
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -105,4 +102,4 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
   );
 }
 
-export default SubcatList;
+export default ProductList;

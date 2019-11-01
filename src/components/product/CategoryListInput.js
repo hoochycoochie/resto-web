@@ -5,7 +5,6 @@ import { categoriesQuery } from "../../graphql/query/category";
 
 const CategoryListInput = ({
   cats: { loading, categories },
-
   setFieldValue,
   error
 }) => {

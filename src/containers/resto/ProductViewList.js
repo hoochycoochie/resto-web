@@ -29,6 +29,7 @@ function ProductViewList({ prods: { loading, fetchMore, findProd }, history }) {
     const company_id = await JSON.parse(
       localStorage.getItem(COMPANY_ID_STORAGE)
     );
+    console.log("variables", variables);
     await fetchMore({
       variables: {
         ...variables,

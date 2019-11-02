@@ -49,14 +49,13 @@ export default compose(
         const company_id = await JSON.parse(
           localStorage.getItem(COMPANY_ID_STORAGE)
         );
+        console.log("category_id", category_id);
         let variables = {
           product: {
             name,
             description,
-
             has_choice,
             has_choice_size,
-
             category_id
           },
           company_id
@@ -73,8 +72,10 @@ export default compose(
           variables.product.choices = choices;
         }
 
+        console.log("variables.category_id", variables.category_id);
+
         const response = await save({ variables });
-        console.log("response", response);
+
         const { ok, errors } = response.data.createProduct;
         if (ok) {
           await setSubmitting(false);

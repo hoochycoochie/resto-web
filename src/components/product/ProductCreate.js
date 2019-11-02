@@ -39,70 +39,51 @@ const ProductCreate = ({
   };
 
   return (
-    <Grid columns={2} divided>
+    <Grid columns={1} divided>
       <Grid.Row>
         <Grid.Column>
           <Form loading={isSubmitting} onSubmit={handleSubmit}>
-            <FormField required>
-              <label>
-                <FormattedMessage id="name" />
-              </label>
-
-              <Input
-                // icon="setting"
-                value={values.name}
-                name="name"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.name && errors.name}
-              />
-
-              {touched.name && errors.name && (
-                <FieldError message={errors.name} />
-              )}
-            </FormField>
-
-            <FormField required>
-              <label>
-                <FormattedMessage id="category" />
-              </label>
-
-              <CategoryListInput
-                error={
-                  touched &&
-                  touched.errors &&
-                  touched.errors.category_id &&
-                  errors &&
-                  errors.category_id
-                }
-                setFieldValue={setFieldValue}
-              />
-
-              {touched.category_id && errors.category_id && (
-                <FieldError message={errors.category_id} />
-              )}
-            </FormField>
-            {!values.has_choice_size && (
+            <Form.Group>
               <FormField required>
                 <label>
-                  <FormattedMessage id="price" />
+                  <FormattedMessage id="name" />
                 </label>
 
                 <Input
-                  type="number"
-                  label={{ basic: true, content: "cfa" }}
-                  labelPosition="right"
-                  value={values.price}
-                  name="price"
-                  fluid
+                  // icon="setting"
+                  value={values.name}
+                  name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  error={touched.name && errors.name}
                 />
-                {touched.price && errors.price && (
-                  <FieldError message={errors.price} />
+
+                {touched.name && errors.name && (
+                  <FieldError message={errors.name} />
                 )}
               </FormField>
-            )}
+
+              <FormField required>
+                <label>
+                  <FormattedMessage id="category" />
+                </label>
+
+                <CategoryListInput
+                  error={
+                    touched &&
+                    touched.errors &&
+                    touched.errors.category_id &&
+                    errors &&
+                    errors.category_id
+                  }
+                  setFieldValue={setFieldValue}
+                />
+
+                {touched.category_id && errors.category_id && (
+                  <FieldError message={errors.category_id} />
+                )}
+              </FormField>
+            </Form.Group>
             <FormField>
               <Checkbox
                 name="has_choice_size"
@@ -117,6 +98,29 @@ const ProductCreate = ({
                 }
               />
             </FormField>
+
+            {!values.has_choice_size && (
+              <FormField required>
+                <label>
+                  <FormattedMessage id="price" />
+                </label>
+
+                <Input
+                style={{width:"40%"}}
+                  type="number"
+                  label={{ basic: true, content: "cfa" }}
+                  labelPosition="right"
+                  value={values.price}
+                  name="price"
+                  size="mini"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {touched.price && errors.price && (
+                  <FieldError message={errors.price} />
+                )}
+              </FormField>
+            )}
 
             {values.has_choice_size && (
               <SizeInput
@@ -135,7 +139,7 @@ const ProductCreate = ({
                 icon="setting"
                 value={values.description}
                 name="description"
-                fluid={1}
+                style={{width:"40%"}}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -179,6 +183,7 @@ const ProductCreate = ({
               </label>
 
               <Input
+                style={{width:"40%"}}
                 type="file"
                 name="file"
                 onChange={async ({

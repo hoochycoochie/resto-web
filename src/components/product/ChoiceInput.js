@@ -1,6 +1,6 @@
 import React from "react";
 import { FieldArray } from "formik";
-import { Button } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 import { FormattedMessage } from "react-intl";
 import FieldError from "../FieldError";
 import { colors } from "../../utils/constants";
@@ -34,7 +34,7 @@ function ChoiceInput({
                   await arrayHelpers.push({
                     name: "",
                     subcat_id: "",
-                    choice_number:"",
+                    choice_number: "",
                     choice_mandatory: false,
                     choice_multiple: false,
                     subprods: []
@@ -55,7 +55,8 @@ function ChoiceInput({
                     borderRadius: 20,
                     borderWidth: 5,
                     borderColor: colors.VIOLET,
-                    backgroundColor: colors.LIGHT_GRAY
+                    backgroundColor: colors.LIGHT_GRAY,
+                    flexDirection:"row"
                   }}
                 >
                   <ChoiceForm

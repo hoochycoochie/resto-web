@@ -9,28 +9,28 @@ const CategoryListInput = ({
   error
 }) => {
   return (
-    <div>
-      <Dropdown
-        loading={loading}
-        fluid
-        search
-        selection
-        error={error}
-        name="category_id"
-        onChange={async (_, { name, value }) => {
-          await setFieldValue("category_id", value);
-        }}
-        options={
-          categories && categories.length
-            ? categories.map(cat => ({
-                key: cat.id,
-                value: cat.id,
-                text: cat.name
-              }))
-            : []
-        }
-      />
-    </div>
+    <Dropdown
+    style={{width:300}}
+      loading={loading}
+      fluid
+      search
+      selection
+      error={error}
+      name="category_id"
+      onChange={async (_, { name, value }) => {
+        console.log("value cat id", value);
+        await setFieldValue("category_id", value);
+      }}
+      options={
+        categories && categories.length
+          ? categories.map(cat => ({
+              key: cat.id,
+              value: cat.id,
+              text: cat.name
+            }))
+          : []
+      }
+    />
   );
 };
 

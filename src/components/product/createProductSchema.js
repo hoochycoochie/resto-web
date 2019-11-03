@@ -36,7 +36,7 @@ const createProductSchema = Yup.object().shape({
     .positive(<FormattedMessage id="invalid_number" />)
     .nullable()
     .when("has_choice_size", (has_choice_size, schema) => {
-      console.log("has_choice_size", has_choice_size);
+      //console.log("has_choice_size", has_choice_size);
       return !has_choice_size
         ? schema
             .typeError(<FormattedMessage id="required" />)

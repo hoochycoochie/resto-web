@@ -85,7 +85,7 @@ function TopMenu({
             await setLogoutModal(false);
             await logout();
           } catch (error) {
-            console.log("error logout", error);
+          //  console.log("error logout", error);
           }
         }}
       />

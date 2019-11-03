@@ -18,7 +18,7 @@ const CategoryListInput = ({
       error={error}
       name="category_id"
       onChange={async (_, { name, value }) => {
-        console.log("value cat id", value);
+       // console.log("value cat id", value);
         await setFieldValue("category_id", value);
       }}
       options={

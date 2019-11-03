@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dropdown } from "semantic-ui-react";
 import { graphql } from "react-apollo";
-
 import { subprodsQuery } from "../../graphql/query/subprod";
 
 const SubprodListInput = ({
@@ -9,11 +8,9 @@ const SubprodListInput = ({
   setFieldValue,
   error,
   inputName,
+
   values
 }) => {
-  const [name, setName] = useState("");
-  const [selected, setSelected] = useState([]);
-
   const handleChange = async (e, { value }) => {
     let val = value;
 

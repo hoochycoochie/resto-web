@@ -36,7 +36,7 @@ const ChoiceForm = ({
   const readOnlyChoiceNumber = choice.choice_multiple ? false : true;
 
   return (
-    <div size="tiny" style={{ padding: 10,width:"100%" }}>
+    <div size="tiny" style={{ padding: 10, width: "100%" }}>
       <Header content={`option ${index + 1}`} />
       <div style={{ float: "right" }}>
         <Icon

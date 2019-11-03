@@ -35,10 +35,8 @@ const SubcatListInput = ({
         name={inputName}
         id={inputName}
         onChange={async (_, { name, value }) => {
-          if (name !== currentName) {
-            await setName(name);
-            await setFieldValue(inputName, value);
-          }
+          await setName(name);
+          await setFieldValue(inputName, value);
         }}
         options={options}
       />

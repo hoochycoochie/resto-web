@@ -3,7 +3,7 @@ import { BrowserRouter, Switch } from "react-router-dom";
 import { graphql, compose } from "react-apollo";
 import messages from "./i18n";
 import { IntlProvider } from "react-intl";
-import { Login, NotFound } from "./containers";
+import { Login, NotFound, Register } from "./containers";
 import { GuestRoute, AuthRoute } from "./routes";
 import { Route } from "react-router-dom";
 
@@ -21,7 +21,8 @@ import {
   RESTAURANT_SUBPROD_PATH,
   RESTAURANT_COMMAND_PATH,
   RESTAURANT_CREATE_PRODUCT_PATH,
-  RESTAURANT_SETTINGS_PATH
+  RESTAURANT_SETTINGS_PATH,
+  REGISTER_PATH
 } from "./utils/static_constants";
 import { GET_CURRENT_LANG_QUERY } from "./graphql/store/query-mutation/settings";
 import {
@@ -61,6 +62,7 @@ class App extends React.Component {
             <Route exact path={NOT_FOUND_PATH} component={NotFound} />
 
             <GuestRoute exact path={LOGIN_PATH} component={Login} />
+            <GuestRoute exact path={REGISTER_PATH} component={Register} />
 
             <AuthRoute
               exact

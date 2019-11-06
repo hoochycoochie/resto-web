@@ -2,7 +2,6 @@ import React from "react";
 import {
   Container,
   Divider,
-//  Dropdown,
   Grid,
   Header,
   Image,
@@ -11,7 +10,11 @@ import {
   Segment
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { ROOT_PATH, LOGIN_PATH } from "../utils/static_constants";
+import {
+  ROOT_PATH,
+  LOGIN_PATH,
+  REGISTER_PATH
+} from "../utils/static_constants";
 import { FormattedMessage } from "react-intl";
 import { colors } from "../utils/constants";
 const logo =
@@ -34,6 +37,10 @@ const Layout = ({ children }) => (
         </Menu.Item>
         <Menu.Item as={Link} to={LOGIN_PATH}>
           <FormattedMessage id="login" />
+        </Menu.Item>
+
+        <Menu.Item as={Link} to={REGISTER_PATH}>
+          <FormattedMessage id="register" />
         </Menu.Item>
       </Container>
     </Menu>

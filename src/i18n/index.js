@@ -118,7 +118,8 @@ export default {
     selected_subprods: "Selected sub products",
     choice_number_max: "Max choice number",
     choice_multipe_error: "Choice not multiple hence choice number should be 1",
-    product_list: "Products list"
+    product_list: "Products list",
+    lastname: "lastname"
   },
 
   fr: {
@@ -294,6 +295,7 @@ export default {
     choice_number_max: "Nombre de choix maximal",
     choice_multipe_error:
       "Vous avez coché choix non multiple par conséquent le nombre de choix est 1",
-    product_list: "Liste des produits"
+    product_list: "Liste des produits",
+    lastname: "Prénom"
   }
 };

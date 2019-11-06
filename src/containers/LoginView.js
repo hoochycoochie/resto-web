@@ -31,9 +31,18 @@ const LoginView = props => (
 );
 
 const loginSchema = Yup.object().shape({
-  identifiant: Yup.string().required(<FormattedMessage id="required" />),
-  reference: Yup.string().required(<FormattedMessage id="required" />),
-  password: Yup.string().required(<FormattedMessage id="required" />)
+  identifiant: Yup.string()
+    .trim()
+    .typeError(<FormattedMessage id="required" />)
+    .required(<FormattedMessage id="required" />),
+  reference: Yup.string()
+    .trim()
+    .typeError(<FormattedMessage id="required" />)
+    .required(<FormattedMessage id="required" />),
+  password: Yup.string()
+    .trim()
+    .typeError(<FormattedMessage id="required" />)
+    .required(<FormattedMessage id="required" />)
 });
 export default compose(
   graphql(loginCompanyMutation, { name: "loginUser" }),

@@ -7,6 +7,7 @@ import { colors } from "../../utils/constants";
 import { RESTAURANT_SUBPROD_PATH_WITH_PARAMS } from "../../utils/static_constants";
 
 function SubcatList({ data, take, total, activePage, onPageChange }) {
+  console.log("data",data)
   return (
     <div>
       <Table size="small">

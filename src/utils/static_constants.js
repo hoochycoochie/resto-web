@@ -11,6 +11,7 @@ const RESTAURANT_SUBPROD_PATH = "/restaurant/subprods/:id";
 const RESTAURANT_SUBPROD_PATH_WITH_PARAMS = "/restaurant/subprods/";
 const RESTAURANT_PRODUCT_PATH = "/restaurant/products";
 const LOGIN_PATH = "/authentication/login";
+const REGISTER_PATH = "/register";
 const ROOT_PATH = "/";
 const RESTAURANT_CREATE_PRODUCT_PATH = "/restaurant/product/new";
 const NOT_FOUND_PATH = "/notfound";
@@ -29,5 +30,6 @@ export {
   RESTAURANT_SUBPROD_PATH_WITH_PARAMS,
   RESTAURANT_COMMAND_PATH,
   RESTAURANT_CREATE_PRODUCT_PATH,
-  RESTAURANT_SETTINGS_PATH
+  RESTAURANT_SETTINGS_PATH,
+  REGISTER_PATH
 };

@@ -5,13 +5,15 @@ export const createSubprodMutation = gql`
     $name: String
     $company_id: String
     $subcat_id: String
-    $price: Int
+    $price: Int,
+    $file:Upload
   ) {
     createSubprod(
       name: $name
       company_id: $company_id
       subcat_id: $subcat_id
       price: $price
+      file:$file
     ) {
       ok
       subprod {
@@ -20,6 +22,7 @@ export const createSubprodMutation = gql`
         company_id
         price
         subcat_id
+        picture
         author {
           id
           name

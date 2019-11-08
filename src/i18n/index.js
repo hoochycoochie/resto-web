@@ -99,7 +99,7 @@ export default {
     name_exists_already: "this name already exists",
     subproduct_list: "Subproducts list",
     settings: "Settings",
-    create_product: "Create Product",
+    create_product: "compose menu",
     has_choice_size: "Are there different sizes or types ?",
     sizes_required: "Types or sizes are required",
     add_sizes_type: "Add types",
@@ -273,7 +273,7 @@ export default {
     name_exists_already: "Ce nom existe déjà",
     subproduct_list: "Liste des sous produits",
     settings: "Paramétrage",
-    create_product: "Créer un produit",
+    create_product: "Créer un menu",
     has_choice_size: "Ya t il des choix de tailles ou types",
     sizes_required:
       "Si vous cochez l'existence de types ou tailles, l'ajout est obligatoire",
@@ -295,7 +295,7 @@ export default {
     choice_number_max: "Nombre de choix maximal",
     choice_multipe_error:
       "Vous avez coché choix non multiple par conséquent le nombre de choix est 1",
-    product_list: "Liste des produits",
+    product_list: "liste des Menus",
     lastname: "Prénom"
   }
 };

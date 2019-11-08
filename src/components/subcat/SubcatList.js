@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Label, Table, Pagination, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import DisplayDate from "../DisplayDate";
 import { FormattedMessage } from "react-intl";
 import { colors } from "../../utils/constants";
 import { RESTAURANT_SUBPROD_PATH_WITH_PARAMS } from "../../utils/static_constants";
+import Subprods from "./Subprods";
 
 function SubcatList({ data, take, total, activePage, onPageChange }) {
-  console.log("data",data)
+  const [subcat, setSubcat] = useState({});
+  const [open, setOpen] = useState(false);
   return (
     <div>
       <Table size="small">
@@ -63,15 +65,15 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
                     size="small"
                   />
                 </Table.Cell>
-                <Table.Cell
-                  style={{ fontSize: 10 }}
-                  as={Link}
-                  to={`${RESTAURANT_SUBPROD_PATH_WITH_PARAMS}${d.id}`}
-                >
+                <Table.Cell style={{ fontSize: 10 }}>
                   <Button
                     icon="eye"
                     style={{ fontSize: 10, color: colors.VIOLET }}
                     size="small"
+                    onClick={async () => {
+                      await setSubcat(d);
+                      await setOpen(true);
+                    }}
                   />
                 </Table.Cell>
                 {d.subprod_count === 0 && (
@@ -100,6 +102,14 @@ function SubcatList({ data, take, total, activePage, onPageChange }) {
             skip: skipper > 0 ? skipper : 0,
             take
           });
+        }}
+      />
+
+      <Subprods
+        subcat={subcat}
+        open={open}
+        cancel={async () => {
+          await setOpen(false);
         }}
       />
     </div>

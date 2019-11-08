@@ -89,10 +89,10 @@ class App extends React.Component {
               path={RESTAURANT_PRODUCT_PATH}
               component={ProductViewList}
             />
-            <AuthRoute
+            {/* <AuthRoute
               path={RESTAURANT_SUBPROD_PATH}
               component={SubprodViewList}
-            />
+            /> */}
 
             <AuthRoute
               path={RESTAURANT_CREATE_PRODUCT_PATH}

@@ -20,6 +20,7 @@ import { findSubprodQuery } from "../../graphql/query/subprod";
 import ApolloCacheUpdater from "apollo-cache-updater";
 function SubprodViewList({
   subprods: { loading, fetchMore, ...rest },
+  subcat,
   handleSubmit: handleSubmit2,
   ...secondRest
 }) {
@@ -28,26 +29,18 @@ function SubprodViewList({
   const [createModal, setCreateModal] = useState(false);
 
   if (loading) {
-    return (
-      <Layout>
-        <Loading />
-      </Layout>
-    );
+    return <Loading />;
   }
 
   const load = async variables => {
     const company_id = await JSON.parse(
       localStorage.getItem(COMPANY_ID_STORAGE)
     );
-    const {
-      match: {
-        params: { id: subcat_id }
-      }
-    } = secondRest;
+
     await fetchMore({
       variables: {
         ...variables,
-        subcat_id,
+        subcat_id: subcat.id,
         company_id
       },
       updateQuery: (prev, { fetchMoreResult }) => {
@@ -92,7 +85,7 @@ function SubprodViewList({
   const handleSubmit = async () => {
     try {
       const {
-        values: { name, price },
+        values: { name, price, file },
         setSubmitting,
         setFieldError,
         handleReset,
@@ -102,13 +95,9 @@ function SubprodViewList({
       const company_id = await JSON.parse(
         localStorage.getItem(COMPANY_ID_STORAGE)
       );
-      const {
-        match: {
-          params: { id: subcat_id }
-        }
-      } = secondRest;
+
       const response = await save({
-        variables: { name, company_id, price, subcat_id },
+        variables: { name, company_id, price, subcat_id: subcat.id, file },
         update: async (
           proxy,
           {
@@ -160,7 +149,7 @@ function SubprodViewList({
   } = rest;
 
   return (
-    <Layout>
+    <div>
       <div>
         <Header
           size="medium"
@@ -180,9 +169,7 @@ function SubprodViewList({
             textAlign: "center",
             fontStyle: "italic"
           }}
-        >
-          total : {total}
-        </Header>
+        ></Header>
       </div>
 
       <SubprodSearch
@@ -208,26 +195,44 @@ function SubprodViewList({
         open={createModal}
         cancel={async () => await setCreateModal(false)}
       />
-    </Layout>
+    </div>
   );
 }
-const createSubprodSchema = Yup.object().shape({
-  name: Yup.string().required(<FormattedMessage id="required" />),
-  price: Yup.number().required(<FormattedMessage id="required" />)
-});
 
+const FILE_SIZE = 1600 * 1024;
+const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
+const createSubprodSchema = Yup.object().shape({
+  price: Yup.number().required(<FormattedMessage id="required" />),
+  name: Yup.string()
+    .trim()
+    .typeError(<FormattedMessage id="required" />)
+    .min(2, <FormattedMessage id="min_2_characters" />)
+    .max(100, <FormattedMessage id="max_100_characters" />)
+    .required(<FormattedMessage id="required" />),
+
+  file: Yup.mixed()
+    .required(<FormattedMessage id="required" />)
+    .test("fileFormat", <FormattedMessage id="not_supported" />, value => {
+      if (value) {
+        return value && SUPPORTED_FORMATS.includes(value.type);
+      }
+      return true;
+    })
+    .test("fileSize", <FormattedMessage id="file_too_large" />, value => {
+      if (value) {
+        return value && value.size <= FILE_SIZE;
+      }
+      return true;
+    })
+});
 export default compose(
   graphql(createSubprodMutation, { name: "save" }),
   graphql(findSubprodQuery, {
     name: "subprods",
-    options: ({
-      match: {
-        params: { id: subcat_id }
-      }
-    }) => {
+    options: ({ subcat }) => {
       return {
         variables: {
-          subcat_id,
+          subcat_id: subcat.id,
           company_id: JSON.parse(localStorage.getItem(COMPANY_ID_STORAGE))
         },
         fetchPolicy: "cache"
@@ -236,6 +241,6 @@ export default compose(
   }),
   withFormik({
     validationSchema: createSubprodSchema,
-    mapPropsToValues: () => ({ name: "", price: "" })
+    mapPropsToValues: () => ({ name: "", price: "", file: null })
   })
 )(SubprodViewList);

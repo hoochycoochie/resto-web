@@ -64,3 +64,42 @@ export const signCompanyOwnerMutation = gql`
     }
   }
 `;
+
+export const createTeamMemberCompanyMutation = gql`
+  mutation createTeamMemberCompany(
+    $phone: String!
+    $password: String!
+    $name: String!
+    $lastname: String!
+    $email: String!
+    $role_ids: [String!]!
+    $company_id: String!
+  ) {
+    createTeamMemberCompany(
+      phone: $phone
+      password: $password
+      name: $name
+      lastname: $lastname
+      email: $email
+      role_ids: $role_ids
+      company_id: $company_id
+    ) {
+      ok
+      user {
+        id
+        email
+        lastname
+        name
+        picture
+        phone
+
+        created_at
+        updated_at
+      }
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

@@ -13,6 +13,7 @@ const SubprodCreate = ({
   handleBlur,
   handleSubmit,
   isSubmitting,
+  setFieldValue,
   open,
   cancel
 }) => (
@@ -71,6 +72,42 @@ const SubprodCreate = ({
             )}
           </FormField>
 
+          <FormField>
+            <label>
+              <FormattedMessage id="picture" />
+            </label>
+
+            <Input
+              fluid={1}
+              style={{ width: "40%" }}
+              type="file"
+              name="file"
+              onChange={async ({
+                target: {
+                  validity,
+                  files: [file]
+                }
+              }) => {
+                await setFieldValue("file", file);
+              }}
+              fluid
+              onBlur={handleBlur}
+            />
+
+            {touched.file && errors.file && (
+              <FieldError message={errors.file} />
+            )}
+          </FormField>
+          {values.file && (
+            <FormField>
+              <img
+                src={URL.createObjectURL(values.file)}
+                alt="senyobante"
+                width="100"
+                height="100"
+              />
+            </FormField>
+          )}
           <Button
             type="submit"
             style={{ backgroundColor: colors.VIOLET, color: colors.PINK }}

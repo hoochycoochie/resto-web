@@ -1,9 +1,9 @@
 import React from "react";
-import { Label, Table, Pagination, Button, Image } from "semantic-ui-react";
+import { Label, Table, Pagination, Image } from "semantic-ui-react";
+import DisplayDate from "../DisplayDate";
 import { FormattedMessage } from "react-intl";
-import { colors } from "../../utils/constants";
 
-function SubprodList({ data, take, total, activePage, onPageChange }) {
+function TeamList({ data, take, total, activePage, onPageChange }) {
   return (
     <div>
       <Table size="small">
@@ -12,8 +12,15 @@ function SubprodList({ data, take, total, activePage, onPageChange }) {
             <Table.HeaderCell>
               <FormattedMessage id="name" />
             </Table.HeaderCell>
+
+            <Table.HeaderCell singleLine>
+              <FormattedMessage id="lastname" />
+            </Table.HeaderCell>
             <Table.HeaderCell>
-              <FormattedMessage id="price" />
+              <FormattedMessage id="phone" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="email" />
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -26,18 +33,16 @@ function SubprodList({ data, take, total, activePage, onPageChange }) {
                   <Label>{d.name}</Label>
                 </Table.Cell>
                 <Table.Cell>
-                  <Label>{d.price}</Label>
+                  <Label>{d.lastname}</Label>
                 </Table.Cell>
 
-                {d.subprod_count === 0 && (
-                  <Table.Cell>
-                    <Button
-                      icon="remove"
-                      style={{ fontSize: 10, color: colors.RED }}
-                      size="small"
-                    />
-                  </Table.Cell>
-                )}
+                <Table.Cell>
+                  <Label>{d.email}</Label>
+                </Table.Cell>
+                <Table.Cell>
+                  <Label>{d.phone}</Label>
+                </Table.Cell>
+
                 <Table.Cell>
                   <Image size="tiny" src={d.picture} />
                 </Table.Cell>
@@ -64,4 +69,4 @@ function SubprodList({ data, take, total, activePage, onPageChange }) {
   );
 }
 
-export default SubprodList;
+export default TeamList;

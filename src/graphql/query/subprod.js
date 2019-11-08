@@ -24,6 +24,7 @@ export const findSubprodQuery = gql`
         company_id
         price
         subcat_id
+        picture
         author {
           id
           name
@@ -44,6 +45,7 @@ export const subprodsQuery = gql`
       id
       name
       price
+      picture
     }
   }
 `;

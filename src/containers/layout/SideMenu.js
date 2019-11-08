@@ -91,7 +91,7 @@ function SideMenu({
             active={commandActive}
             style={createProdActive ? activeStyle : {}}
           >
-            <TextIcon hideText={smallMenu} name="plus">
+            <TextIcon hideText={smallMenu} name="food">
               <FormattedMessage id="create_product" />
             </TextIcon>
           </Menu.Item>

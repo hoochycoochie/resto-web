@@ -5,6 +5,7 @@ export const categoriesQuery = gql`
     categories {
       id
       name
+      picture
     }
   }
 `;

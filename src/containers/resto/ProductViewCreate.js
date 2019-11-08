@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { withFormik } from "formik";
 import { compose, graphql } from "react-apollo";
 import Layout from "../layout/layoutadmin";
 import ProductCreate from "../../components/product/ProductCreate";
 import { createProductMutation } from "../../graphql/mutation/product";
 import createProductSchema from "../../components/product/createProductSchema";
-import { COMPANY_ID_STORAGE } from "../../utils/static_constants";
+import {
+  COMPANY_ID_STORAGE,
+  RESTAURANT_PRODUCT_PATH
+} from "../../utils/static_constants";
 import { FormattedMessage } from "react-intl";
-
+import ApolloCacheUpdater from "apollo-cache-updater";
+import { findProdQuery } from "../../graphql/query/product";
+ 
 function ProductViewCreate(props) {
   return (
     <Layout>
@@ -72,13 +77,36 @@ export default compose(
           variables.product.choices = choices;
         }
 
-        console.log("variables.category_id", variables.category_id);
+        const response = await save({
+          variables,
 
-        const response = await save({ variables });
+          update: async (proxy, { data }) => {
+            const mutationResult = data.createProduct.product; // mutation result to pass into the updater
+            const updates = ApolloCacheUpdater({
+              proxy, // apollo proxy
+              queriesToUpdate: [findProdQuery], // queries you want to automatically update
+              searchVariables: {},
+              mutationResult,
+              operation: {
+                type: "ADD",
+                add: ({ data: { data, total, ...rest } }) => {
+                  return {
+                    ...rest,
+                    total: total + 1,
+                    data: [{ ...mutationResult }, ...data]
+                  };
+                }
+              }
+            });
+            console.log("updates", updates);
+          }
+        });
 
         const { ok, errors } = response.data.createProduct;
         if (ok) {
           await setSubmitting(false);
+
+          await history.push(RESTAURANT_PRODUCT_PATH);
           // await handleReset();
           // await setCreateModal(false);
         } else {

@@ -5,6 +5,7 @@ const FILE_SIZE = 1600 * 1024;
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 const createProductSchema = Yup.object().shape({
   file: Yup.mixed()
+    .required(<FormattedMessage id="required" />)
     .test("fileFormat", <FormattedMessage id="not_supported" />, value => {
       if (value) {
         return value && SUPPORTED_FORMATS.includes(value.type);
@@ -85,8 +86,9 @@ const createProductSchema = Yup.object().shape({
                 .min(2, <FormattedMessage id="min_2_characters" />)
                 .max(50, <FormattedMessage id="max_50_characters" />), // these constraints take precedence
 
-              subprod_id: Yup.string()
-              .required(<FormattedMessage id="required" />),
+              subprod_id: Yup.string().required(
+                <FormattedMessage id="required" />
+              ),
               price: Yup.number()
                 .typeError(<FormattedMessage id="required" />)
                 .required(<FormattedMessage id="required" />)

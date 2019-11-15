@@ -12,7 +12,7 @@ import {
 import { FormattedMessage } from "react-intl";
 import ApolloCacheUpdater from "apollo-cache-updater";
 import { findProdQuery } from "../../graphql/query/product";
- 
+
 function ProductViewCreate(props) {
   return (
     <Layout>
@@ -101,7 +101,7 @@ export default compose(
             console.log("updates", updates);
           }
         });
-
+        console.log("respnse", response);
         const { ok, errors } = response.data.createProduct;
         if (ok) {
           await setSubmitting(false);

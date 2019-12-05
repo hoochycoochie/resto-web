@@ -17,8 +17,8 @@ import {
 } from "../utils/static_constants";
 import { FormattedMessage } from "react-intl";
 import { colors } from "../utils/constants";
-const logo =
-  "https://cdn1.vectorstock.com/i/1000x1000/13/80/organic-food-restaurant-logo-vector-17131380.jpg";
+import logo from "./senresto.png"
+ 
 const Layout = ({ children }) => (
   <div>
     <Menu
@@ -30,7 +30,7 @@ const Layout = ({ children }) => (
       <Container>
         <Menu.Item as={Link} to={ROOT_PATH} header>
           <Image size="mini" src={logo} style={{ marginRight: "1.5em" }} />
-          SenYobante Entreprise
+          SenResto
         </Menu.Item>
         <Menu.Item as={Link} to={ROOT_PATH}>
           <FormattedMessage id="home" />
@@ -38,10 +38,10 @@ const Layout = ({ children }) => (
         <Menu.Item as={Link} to={LOGIN_PATH}>
           <FormattedMessage id="login" />
         </Menu.Item>
-
+{/* 
         <Menu.Item as={Link} to={REGISTER_PATH}>
           <FormattedMessage id="register" />
-        </Menu.Item>
+        </Menu.Item> */}
       </Container>
     </Menu>
 
@@ -49,7 +49,7 @@ const Layout = ({ children }) => (
       {children}
     </Container>
 
-    <Segment
+    {/* <Segment
       inverted
       vertical
       style={{
@@ -113,7 +113,7 @@ const Layout = ({ children }) => (
           </List.Item>
         </List>
       </Container>
-    </Segment>
+    </Segment> */}
   </div>
 );
 

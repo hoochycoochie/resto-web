@@ -6,9 +6,9 @@ moment.locale("fr");
 
 const computeDate = date => {
   if (parseInt(date)) {
-    return moment(new Date(parseInt(date))).format("dddd Do  MMMM YYYY");
+    return moment(new Date(parseInt(date))).format("LLLL");
   }
-  return moment(date).format("dddd Do  MMMM YYYY");
+  return moment(date).format("LLLL");
 };
 function DisplayDate({ date }) {
   return (

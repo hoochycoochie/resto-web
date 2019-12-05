@@ -1,25 +1,31 @@
 import React from "react";
 import { Container, Header, Image } from "semantic-ui-react";
 import Layout from "./layout";
-const logo =
-  "https://cdn1.vectorstock.com/i/1000x1000/13/80/organic-food-restaurant-logo-vector-17131380.jpg";
+import android from "./android.png";
 const Home = ({ children }) => (
   <Layout>
     <Container text style={{ marginTop: "7em" }}>
-      <Header as="h1">Semantic UI React Fixed Template</Header>
-      <p>This is a basic fixed menu template using fixed size containers.</p>
+      <Header as="h1">Senresto</Header>
       <p>
-        A text container is used for the main container, which is useful for
-        single column layouts.
+        senresto est une application de senyobante uniquement dédiée aux
+        restaurateurs inscrits chez senyobante, et permet à ces derniers de
+        recevoir en temps réels les commandes faites par les clients
       </p>
-
+      
+      <a
+        href="https://play.google.com/store/apps/details?id=com.senresto"
+        target="_blank"
+      >
+        <Image src={android} style={{ marginTop: "2em" }} />
+      </a>
+      {/* 
       <Image src={logo} style={{ marginTop: "2em" }} />
       <Image src={logo} style={{ marginTop: "2em" }} />
       <Image src={logo} style={{ marginTop: "2em" }} />
       <Image src={logo} style={{ marginTop: "2em" }} />
       <Image src={logo} style={{ marginTop: "2em" }} />
       <Image src={logo} style={{ marginTop: "2em" }} />
-      <Image src={logo} style={{ marginTop: "2em" }} />
+      <Image src={logo} style={{ marginTop: "2em" }} /> */}
     </Container>
   </Layout>
 );
